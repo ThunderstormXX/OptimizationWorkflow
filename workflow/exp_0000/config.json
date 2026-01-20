@@ -1,0 +1,14 @@
+{
+  "cond": 10.0,
+  "constraint": "l2ball",
+  "description": "FW + gossip on synthetic quadratic",
+  "dim": 10,
+  "env": "gossip",
+  "exp_name": "demo",
+  "n_nodes": 5,
+  "radius": 1.0,
+  "seed": 0,
+  "step_schedule": "harmonic",
+  "steps": 20,
+  "topology": "ring"
+}

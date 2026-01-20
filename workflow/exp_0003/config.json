@@ -1,0 +1,18 @@
+{
+  "cond": 10.0,
+  "constraint": "l2ball",
+  "description": "Regression checks: FW gossip ring",
+  "dim": 10,
+  "env": "gossip",
+  "exp_name": "checks_demo",
+  "gamma": 0.2,
+  "lr": 0.1,
+  "n_nodes": 5,
+  "optimizer": "fw",
+  "radius": 2.0,
+  "seed": 0,
+  "step_schedule": "harmonic",
+  "steps": 30,
+  "strategy": "local_then_gossip",
+  "topology": "ring"
+}

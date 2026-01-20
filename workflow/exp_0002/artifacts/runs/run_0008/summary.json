@@ -1,0 +1,20 @@
+{
+  "cond": 10.0,
+  "constraint": "l2ball",
+  "dim": 10,
+  "env": "gossip",
+  "final_consensus_error": 6.001015896471185e-07,
+  "final_dist_to_opt": 0.20315205790504903,
+  "final_mean_loss": -1.514186829051637,
+  "final_suboptimality": 0.02451275668853392,
+  "gamma": 0.2,
+  "lr": 0.05,
+  "n_nodes": 5,
+  "optimizer": "pgd",
+  "radius": 2.0,
+  "seed": 0,
+  "step_schedule": "na",
+  "steps": 20,
+  "strategy": "local_then_gossip",
+  "topology": "ring"
+}

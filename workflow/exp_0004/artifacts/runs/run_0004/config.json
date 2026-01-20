@@ -1,0 +1,16 @@
+{
+  "cond": 10.0,
+  "constraint": "l2ball",
+  "dim": 10,
+  "env": "gossip",
+  "gamma": 0.2,
+  "lr": 0.1,
+  "n_nodes": 5,
+  "optimizer": "fw",
+  "radius": 2.0,
+  "seed": 0,
+  "step_schedule": "harmonic",
+  "steps": 20,
+  "strategy": "local_then_gossip",
+  "topology": "complete"
+}

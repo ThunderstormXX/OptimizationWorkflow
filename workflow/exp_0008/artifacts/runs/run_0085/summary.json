@@ -1,0 +1,22 @@
+{
+  "batch_size": 64,
+  "constraint": "l2ball",
+  "dim": 10,
+  "env": "gossip",
+  "final_consensus_error": 3.736321307236524e-17,
+  "final_mean_accuracy": 0.6849999999999999,
+  "final_mean_loss": 0.6174739336333388,
+  "gamma": 0.2,
+  "heterogeneity": "iid",
+  "lr": 0.1,
+  "n_nodes": 5,
+  "n_samples": 1000,
+  "optimizer": "gd",
+  "radius": 1.0,
+  "seed": 1,
+  "step_schedule": "na",
+  "steps": 30,
+  "strategy": "local_then_gossip",
+  "task": "logistic",
+  "topology": "complete"
+}

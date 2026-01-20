@@ -1,0 +1,16 @@
+{
+  "cond": 10.0,
+  "constraint": "l2ball",
+  "dim": 10,
+  "env": "gossip",
+  "gamma": 0.2,
+  "lr": 0.05,
+  "n_nodes": 5,
+  "optimizer": "pgd",
+  "radius": 2.0,
+  "seed": 0,
+  "step_schedule": "na",
+  "steps": 20,
+  "strategy": "gossip_then_local",
+  "topology": "ring"
+}
