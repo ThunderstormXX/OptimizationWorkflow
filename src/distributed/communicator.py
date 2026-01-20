@@ -57,6 +57,43 @@ class SynchronousGossipCommunicator:
             # Compute Metropolis-Hastings weights
             object.__setattr__(self, "rows", metropolis_hastings_rows(self.topology))
 
+    def edge_weights(self) -> list[tuple[NodeId, NodeId, float]]:
+        """Return undirected edges with their communication weights.
+
+        Returns a list of (i, j, weight) tuples for all edges where i < j.
+        The weight is computed as (w_ij + w_ji) / 2 for symmetry.
+        Self-loops (i == j) are excluded.
+
+        Returns:
+            List of (node_i, node_j, weight) tuples sorted by (i, j).
+        """
+        n = self.topology.num_nodes()
+        edges: list[tuple[NodeId, NodeId, float]] = []
+        seen: set[tuple[NodeId, NodeId]] = set()
+
+        for i in range(n):
+            row_i = self.rows.get(i, {})
+            for j in row_i:
+                if i == j:
+                    continue  # Skip self-loops
+                # Ensure i < j for undirected edge
+                edge = (min(i, j), max(i, j))
+                if edge in seen:
+                    continue
+                seen.add(edge)
+
+                # Compute symmetric weight
+                w_ij = row_i.get(j, 0.0)
+                row_j = self.rows.get(j, {})
+                w_ji = row_j.get(i, 0.0)
+                weight = (w_ij + w_ji) / 2.0
+
+                edges.append((edge[0], edge[1], weight))
+
+        # Sort by (i, j) for determinism
+        edges.sort(key=lambda e: (e[0], e[1]))
+        return edges
+
     def gossip(self, payloads: Mapping[NodeId, ParamVector]) -> dict[NodeId, ParamVector]:
         """Perform one synchronous gossip/mixing round.
 

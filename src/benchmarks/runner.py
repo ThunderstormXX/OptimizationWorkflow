@@ -34,6 +34,12 @@ from typing import Any
 
 import numpy as np
 
+from benchmarks.animate import (
+    build_metadata_strings,
+    read_trace_jsonl,
+    render_animation,
+    write_trace_line,
+)
 from benchmarks.checks import run_checks
 from benchmarks.metrics import consensus_error, mean_params, suboptimality
 from benchmarks.plotting import (
@@ -237,6 +243,38 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         help="Disable automatic plot and report generation",
     )
 
+    # Animation
+    parser.add_argument(
+        "--animate",
+        action="store_true",
+        help="Generate animated visualization (GIF) of the optimization process",
+    )
+    parser.add_argument(
+        "--animate-top-k",
+        type=int,
+        default=5,
+        help="For matrix mode: animate only top-K runs by best metric",
+    )
+    parser.add_argument(
+        "--animate-metric",
+        type=str,
+        choices=["mean_loss", "final_suboptimality", "final_mean_loss"],
+        default="final_mean_loss",
+        help="Metric to use for selecting top-K runs to animate",
+    )
+    parser.add_argument(
+        "--animate-fps",
+        type=int,
+        default=8,
+        help="Frames per second for animation",
+    )
+    parser.add_argument(
+        "--animate-max-steps",
+        type=int,
+        default=200,
+        help="Maximum frames in animation (subsample if steps > this)",
+    )
+
     # Descriptive
     parser.add_argument("--exp-name", type=str, default=None, help="Experiment name")
     parser.add_argument("--description", type=str, default=None, help="Experiment description")
@@ -293,6 +331,7 @@ def run_once(
     out_dir: Path,
     *,
     save_history: bool = True,
+    save_trace: bool = False,
 ) -> dict[str, Any]:
     """Run a single experiment with the given configuration.
 
@@ -300,6 +339,7 @@ def run_once(
         config: Configuration dictionary with all parameters.
         out_dir: Directory to write artifacts (summary.json, optionally history.jsonl).
         save_history: Whether to save history.jsonl.
+        save_trace: Whether to save trace.jsonl for animation.
 
     Returns:
         Summary dictionary with final metrics.
@@ -317,15 +357,23 @@ def run_once(
         task: Any = SyntheticQuadraticTask(problem)
 
         if config["env"] == "single":
-            summary = _run_single_env_quadratic(config, task, out_dir, save_history=save_history)
+            summary = _run_single_env_quadratic(
+                config, task, out_dir, save_history=save_history, save_trace=save_trace
+            )
         else:
-            summary = _run_gossip_env_quadratic(config, task, out_dir, save_history=save_history)
+            summary = _run_gossip_env_quadratic(
+                config, task, out_dir, save_history=save_history, save_trace=save_trace
+            )
     else:
         # Logistic regression task
         if config["env"] == "single":
-            summary = _run_single_env_logistic(config, out_dir, save_history=save_history)
+            summary = _run_single_env_logistic(
+                config, out_dir, save_history=save_history, save_trace=save_trace
+            )
         else:
-            summary = _run_gossip_env_logistic(config, out_dir, save_history=save_history)
+            summary = _run_gossip_env_logistic(
+                config, out_dir, save_history=save_history, save_trace=save_trace
+            )
 
     # Write summary.json
     summary_path = out_dir / "summary.json"
@@ -341,6 +389,7 @@ def _run_single_env_quadratic(
     out_dir: Path,
     *,
     save_history: bool = True,
+    save_trace: bool = False,
 ) -> dict[str, Any]:
     """Run single-process environment experiment with quadratic task."""
     seed = config["seed"]
@@ -371,18 +420,54 @@ def _run_single_env_quadratic(
 
     # Collect per-step metrics
     history_lines: list[dict[str, Any]] = []
-    for t in range(steps):
-        result = env.step()
-        step_result: StepResult = result
-        line: dict[str, Any] = {
-            "step": t,
-            "mean_loss": step_result.loss,
-        }
-        if "grad_norm" in step_result.metrics:
-            line["mean_grad_norm"] = step_result.metrics["grad_norm"]
-        if "dist_to_opt" in step_result.metrics:
-            line["mean_dist_to_opt"] = step_result.metrics["dist_to_opt"]
-        history_lines.append(line)
+
+    # Open trace file if needed
+    trace_file = None
+    if save_trace:
+        trace_path = out_dir / "trace.jsonl"
+        trace_file = trace_path.open("w", encoding="utf-8")
+
+    try:
+        for t in range(steps):
+            result = env.step()
+            step_result: StepResult = result
+            line: dict[str, Any] = {
+                "step": t,
+                "mean_loss": step_result.loss,
+            }
+            if "grad_norm" in step_result.metrics:
+                line["mean_grad_norm"] = step_result.metrics["grad_norm"]
+            if "dist_to_opt" in step_result.metrics:
+                line["mean_dist_to_opt"] = step_result.metrics["dist_to_opt"]
+            history_lines.append(line)
+
+            # Write trace line if requested
+            if trace_file:
+                params = model.parameters_vector()
+                node_metrics = {
+                    "0": {
+                        "loss": step_result.loss,
+                        "dist_to_opt": step_result.metrics.get("dist_to_opt", 0.0),
+                        "param_norm": float(np.linalg.norm(params)),
+                    }
+                }
+                mean_metrics = {
+                    "mean_loss": step_result.loss,
+                    "suboptimality": suboptimality(task, params),
+                }
+                if "dist_to_opt" in step_result.metrics:
+                    mean_metrics["mean_dist_to_opt"] = step_result.metrics["dist_to_opt"]
+                write_trace_line(
+                    trace_file,
+                    t=t,
+                    env="single",
+                    node_metrics=node_metrics,
+                    mean_metrics=mean_metrics,
+                    params_by_node={"0": params.tolist()},
+                )
+    finally:
+        if trace_file:
+            trace_file.close()
 
     # Write history.jsonl if requested
     if save_history:
@@ -423,6 +508,7 @@ def _run_gossip_env_quadratic(
     out_dir: Path,
     *,
     save_history: bool = True,
+    save_trace: bool = False,
 ) -> dict[str, Any]:
     """Run gossip environment experiment with quadratic task."""
     seed = config["seed"]
@@ -440,6 +526,15 @@ def _run_gossip_env_quadratic(
     else:
         topology = CompleteTopology(n=n_nodes)
     communicator = SynchronousGossipCommunicator(topology=topology)
+
+    # Extract comm_graph for animation (if save_trace is enabled)
+    comm_graph: dict[str, Any] | None = None
+    if save_trace:
+        edge_weights = communicator.edge_weights()
+        comm_graph = {
+            "edges": [[e[0], e[1]] for e in edge_weights],
+            "weights": [e[2] for e in edge_weights],
+        }
 
     # Build strategy using registry (with config for gradient_tracking)
     strategy = get_strategy_with_config(strategy_name, config)
@@ -482,30 +577,69 @@ def _run_gossip_env_quadratic(
 
     # Collect per-step metrics
     history_lines: list[dict[str, Any]] = []
-    for t in range(steps):
-        step_record = env.step()
-        result: Mapping[NodeId, StepResult] = step_record  # type: ignore[assignment]
 
-        losses = [result[i].loss for i in range(n_nodes)]
-        mean_loss = float(np.mean(losses))
+    # Open trace file if needed
+    trace_file = None
+    if save_trace:
+        trace_path = out_dir / "trace.jsonl"
+        trace_file = trace_path.open("w", encoding="utf-8")
 
-        line: dict[str, Any] = {
-            "step": t,
-            "mean_loss": mean_loss,
-        }
+    try:
+        for t in range(steps):
+            step_record = env.step()
+            result: Mapping[NodeId, StepResult] = step_record  # type: ignore[assignment]
 
-        if "grad_norm" in result[0].metrics:
-            grad_norms = [result[i].metrics["grad_norm"] for i in range(n_nodes)]
-            line["mean_grad_norm"] = float(np.mean(grad_norms))
+            losses = [result[i].loss for i in range(n_nodes)]
+            mean_loss = float(np.mean(losses))
 
-        if "dist_to_opt" in result[0].metrics:
-            dists = [result[i].metrics["dist_to_opt"] for i in range(n_nodes)]
-            line["mean_dist_to_opt"] = float(np.mean(dists))
+            line: dict[str, Any] = {
+                "step": t,
+                "mean_loss": mean_loss,
+            }
 
-        params_by_node = env.get_params_by_node()
-        line["consensus_error"] = consensus_error(params_by_node)
+            if "grad_norm" in result[0].metrics:
+                grad_norms = [result[i].metrics["grad_norm"] for i in range(n_nodes)]
+                line["mean_grad_norm"] = float(np.mean(grad_norms))
 
-        history_lines.append(line)
+            if "dist_to_opt" in result[0].metrics:
+                dists = [result[i].metrics["dist_to_opt"] for i in range(n_nodes)]
+                line["mean_dist_to_opt"] = float(np.mean(dists))
+
+            params_by_node = env.get_params_by_node()
+            cons_err = consensus_error(params_by_node)
+            line["consensus_error"] = cons_err
+
+            history_lines.append(line)
+
+            # Write trace line if requested
+            if trace_file:
+                x_bar = mean_params(params_by_node)
+                node_metrics_dict: dict[str, dict[str, float]] = {}
+                for i in range(n_nodes):
+                    node_metrics_dict[str(i)] = {
+                        "loss": result[i].loss,
+                        "dist_to_opt": result[i].metrics.get("dist_to_opt", 0.0),
+                        "param_norm": float(np.linalg.norm(params_by_node[i])),
+                    }
+                mean_metrics_dict: dict[str, float] = {
+                    "mean_loss": mean_loss,
+                    "suboptimality": suboptimality(task, x_bar),
+                    "consensus_error": cons_err,
+                }
+                if "dist_to_opt" in result[0].metrics:
+                    mean_metrics_dict["mean_dist_to_opt"] = line["mean_dist_to_opt"]
+                write_trace_line(
+                    trace_file,
+                    t=t,
+                    env="gossip",
+                    node_metrics=node_metrics_dict,
+                    mean_metrics=mean_metrics_dict,
+                    params_by_node={str(i): params_by_node[i].tolist() for i in range(n_nodes)},
+                    comm={"mode": "sync"},
+                )
+    finally:
+        if trace_file:
+            trace_file.close()
 
     # Write history.jsonl if requested
     if save_history:
@@ -547,6 +681,10 @@ def _run_gossip_env_quadratic(
         "final_dist_to_opt": final_mean_dist,
     }
 
+    # Add comm_graph if we saved trace
+    if comm_graph is not None:
+        summary["comm_graph"] = comm_graph
+
     return summary
 
 
@@ -555,6 +693,7 @@ def _run_single_env_logistic(
     out_dir: Path,
     *,
     save_history: bool = True,
+    save_trace: bool = False,
 ) -> dict[str, Any]:
     """Run single-process environment experiment with logistic task."""
     seed = config["seed"]
@@ -596,16 +735,50 @@ def _run_single_env_logistic(
 
     # Collect per-step metrics
     history_lines: list[dict[str, Any]] = []
-    for t in range(steps):
-        result = env.step()
-        step_result: StepResult = result
-        line: dict[str, Any] = {
-            "step": t,
-            "mean_loss": step_result.loss,
-        }
-        if "accuracy" in step_result.metrics:
-            line["accuracy"] = step_result.metrics["accuracy"]
-        history_lines.append(line)
+
+    # Open trace file if needed
+    trace_file = None
+    if save_trace:
+        trace_path = out_dir / "trace.jsonl"
+        trace_file = trace_path.open("w", encoding="utf-8")
+
+    try:
+        for t in range(steps):
+            result = env.step()
+            step_result: StepResult = result
+            line: dict[str, Any] = {
+                "step": t,
+                "mean_loss": step_result.loss,
+            }
+            if "accuracy" in step_result.metrics:
+                line["accuracy"] = step_result.metrics["accuracy"]
+            history_lines.append(line)
+
+            # Write trace line if requested
+            if trace_file:
+                params = model.parameters_vector()
+                node_metrics = {
+                    "0": {
+                        "loss": step_result.loss,
+                        "accuracy": step_result.metrics.get("accuracy", 0.0),
+                        "param_norm": float(np.linalg.norm(params)),
+                    }
+                }
+                mean_metrics = {
+                    "mean_loss": step_result.loss,
+                    "mean_accuracy": step_result.metrics.get("accuracy", 0.0),
+                }
+                write_trace_line(
+                    trace_file,
+                    t=t,
+                    env="single",
+                    node_metrics=node_metrics,
+                    mean_metrics=mean_metrics,
+                    params_by_node={"0": params.tolist()},
+                )
+    finally:
+        if trace_file:
+            trace_file.close()
 
     # Write history.jsonl if requested
     if save_history:
@@ -644,6 +817,7 @@ def _run_gossip_env_logistic(
     out_dir: Path,
     *,
     save_history: bool = True,
+    save_trace: bool = False,
 ) -> dict[str, Any]:
     """Run gossip environment experiment with logistic task."""
     seed = config["seed"]
@@ -664,6 +838,15 @@ def _run_gossip_env_logistic(
     else:
         topology = CompleteTopology(n=n_nodes)
     communicator = SynchronousGossipCommunicator(topology=topology)
+
+    # Extract comm_graph for animation (if save_trace is enabled)
+    comm_graph: dict[str, Any] | None = None
+    if save_trace:
+        edge_weights = communicator.edge_weights()
+        comm_graph = {
+            "edges": [[e[0], e[1]] for e in edge_weights],
+            "weights": [e[2] for e in edge_weights],
+        }
 
     # Build strategy using registry (with config for gradient_tracking)
     strategy = get_strategy_with_config(strategy_name, config)
@@ -711,26 +894,64 @@ def _run_gossip_env_logistic(
 
     # Collect per-step metrics
     history_lines: list[dict[str, Any]] = []
-    for t in range(steps):
-        step_record = env.step()
-        result: Mapping[NodeId, StepResult] = step_record  # type: ignore[assignment]
 
-        losses = [result[i].loss for i in range(n_nodes)]
-        mean_loss = float(np.mean(losses))
+    # Open trace file if needed
+    trace_file = None
+    if save_trace:
+        trace_path = out_dir / "trace.jsonl"
+        trace_file = trace_path.open("w", encoding="utf-8")
 
-        line: dict[str, Any] = {
-            "step": t,
-            "mean_loss": mean_loss,
-        }
+    try:
+        for t in range(steps):
+            step_record = env.step()
+            result: Mapping[NodeId, StepResult] = step_record  # type: ignore[assignment]
 
-        if "accuracy" in result[0].metrics:
-            accs = [result[i].metrics["accuracy"] for i in range(n_nodes)]
-            line["mean_accuracy"] = float(np.mean(accs))
+            losses = [result[i].loss for i in range(n_nodes)]
+            mean_loss = float(np.mean(losses))
 
-        params_by_node = env.get_params_by_node()
-        line["consensus_error"] = consensus_error(params_by_node)
+            line: dict[str, Any] = {
+                "step": t,
+                "mean_loss": mean_loss,
+            }
 
-        history_lines.append(line)
+            mean_acc = 0.0
+            if "accuracy" in result[0].metrics:
+                accs = [result[i].metrics["accuracy"] for i in range(n_nodes)]
+                mean_acc = float(np.mean(accs))
+                line["mean_accuracy"] = mean_acc
+
+            params_by_node = env.get_params_by_node()
+            cons_err = consensus_error(params_by_node)
+            line["consensus_error"] = cons_err
+
+            history_lines.append(line)
+
+            # Write trace line if requested
+            if trace_file:
+                node_metrics_dict: dict[str, dict[str, float]] = {}
+                for i in range(n_nodes):
+                    node_metrics_dict[str(i)] = {
+                        "loss": result[i].loss,
+                        "accuracy": result[i].metrics.get("accuracy", 0.0),
+                        "param_norm": float(np.linalg.norm(params_by_node[i])),
+                    }
+                mean_metrics_dict: dict[str, float] = {
+                    "mean_loss": mean_loss,
+                    "mean_accuracy": mean_acc,
+                    "consensus_error": cons_err,
+                }
+                write_trace_line(
+                    trace_file,
+                    t=t,
+                    env="gossip",
+                    node_metrics=node_metrics_dict,
+                    mean_metrics=mean_metrics_dict,
+                    params_by_node={str(i): params_by_node[i].tolist() for i in range(n_nodes)},
+                    comm={"mode": "sync"},
+                )
+    finally:
+        if trace_file:
+            trace_file.close()
 
     # Write history.jsonl if requested
     if save_history:
@@ -771,6 +992,10 @@ def _run_gossip_env_logistic(
         "final_mean_accuracy": final_mean_acc,
         "final_consensus_error": final_cons_error,
     }
+
+    # Add comm_graph if we saved trace
+    if comm_graph is not None:
+        summary["comm_graph"] = comm_graph
 
     return summary
 
@@ -1030,7 +1255,11 @@ def load_ablation_spec(spec_path: Path, args: argparse.Namespace) -> list[dict[s
 
 
 def run_matrix_mode(
-    args: argparse.Namespace, exp_dir: Path, *, render: bool = True
+    args: argparse.Namespace,
+    exp_dir: Path,
+    *,
+    render: bool = True,
+    animate: bool = False,
 ) -> dict[str, Any]:
     """Run matrix mode: execute grid of experiments and write results.csv.
 
@@ -1038,6 +1267,7 @@ def run_matrix_mode(
         args: Parsed command-line arguments.
         exp_dir: Experiment directory.
         render: Whether to generate plots and visual report.
+        animate: Whether to generate animated visualizations for top-K runs.
 
     Returns:
         Global summary dictionary.
@@ -1067,6 +1297,9 @@ def run_matrix_mode(
     if grid:
         task = grid[0].get("task", task)
 
+    # If animating, we need to save traces for all runs
+    save_trace = animate
+
     for idx, config in enumerate(grid):
         run_id = f"run_{idx:04d}"
         run_dir = runs_dir / run_id
@@ -1077,8 +1310,8 @@ def run_matrix_mode(
         with config_path.open("w", encoding="utf-8") as f:
             json.dump(config, f, indent=2, sort_keys=True)
 
-        # Run experiment
-        summary = run_once(config, run_dir, save_history=args.save_histories)
+        # Run experiment (save trace if animating)
+        summary = run_once(config, run_dir, save_history=args.save_histories, save_trace=save_trace)
         summary["run_id"] = run_id
 
         all_summaries.append(summary)
@@ -1101,6 +1334,7 @@ def run_matrix_mode(
         json.dump(global_summary, f, indent=2, sort_keys=True)
 
     # Generate plots and visual report if rendering is enabled
+    plots: dict[str, Path] = {}
     if render:
         artifacts_dir = exp_dir / "artifacts"
 
@@ -1110,13 +1344,99 @@ def run_matrix_mode(
         # Generate aggregate plots
         plots = plot_matrix_results(rows, artifacts_dir, task=task)
 
-        # Generate visual report
+    # Generate animations for top-K runs if requested
+    animated_runs: list[dict[str, Any]] = []
+    if animate:
+        artifacts_dir = exp_dir / "artifacts"
+        top_k = getattr(args, "animate_top_k", 5)
+        animate_metric = getattr(args, "animate_metric", "final_mean_loss")
+
+        # Sort runs by metric (lower is better for loss/suboptimality)
+        sorted_summaries = sorted(all_summaries, key=lambda s: s.get(animate_metric, float("inf")))
+
+        # Animate top-K runs
+        for run_summary in sorted_summaries[:top_k]:
+            run_id = run_summary["run_id"]
+            run_dir = runs_dir / run_id
+            trace_path = run_dir / "trace.jsonl"
+
+            if trace_path.exists():
+                trace = read_trace_jsonl(trace_path)
+                animation_path = run_dir / "animation.gif"
+                animation_mp4_path = run_dir / "animation.mp4"
+
+                # Get config for this run
+                config_path = run_dir / "config.json"
+                with config_path.open("r", encoding="utf-8") as f:
+                    run_config = json.load(f)
+
+                # Get comm_graph from summary if available
+                comm_graph = run_summary.get("comm_graph")
+
+                render_animation(
+                    trace=trace,
+                    out_gif=animation_path,
+                    topology=run_config.get("topology"),
+                    fps=getattr(args, "animate_fps", 8),
+                    max_steps=getattr(args, "animate_max_steps", 200),
+                    title=f"{run_id} ({run_config.get('optimizer', 'N/A')})",
+                    config=run_config,
+                    comm_graph=comm_graph,
+                    out_mp4=animation_mp4_path,
+                )
+
+                # Build metadata filename
+                _, _, filename_base = build_metadata_strings(run_config)
+
+                animated_runs.append(
+                    {
+                        "run_id": run_id,
+                        "config_summary": f"opt={run_config.get('optimizer')}, "
+                        f"strat={run_config.get('strategy')}, "
+                        f"topo={run_config.get('topology')}",
+                        "metric_value": run_summary.get(animate_metric, "N/A"),
+                        "animation_path": f"runs/{run_id}/animation.gif",
+                        "animation_mp4_path": f"runs/{run_id}/animation.mp4",
+                        "filename_base": filename_base,
+                    }
+                )
+
+        # Write animations.md index
+        if animated_runs:
+            animations_md_path = artifacts_dir / "animations.md"
+            with animations_md_path.open("w", encoding="utf-8") as f:
+                f.write("# Animated Runs\n\n")
+                f.write(f"Top {len(animated_runs)} runs by `{animate_metric}`:\n\n")
+                f.write("| Run ID | Config | Metric Value | Animation | MP4 |\n")
+                f.write("|--------|--------|--------------|-----------|-----|\n")
+                for run in animated_runs:
+                    metric_str = (
+                        f"{run['metric_value']:.6f}"
+                        if isinstance(run["metric_value"], float)
+                        else str(run["metric_value"])
+                    )
+                    mp4_link = f"[MP4]({run['animation_mp4_path']})"
+                    f.write(
+                        f"| {run['run_id']} | {run['config_summary']} | {metric_str} "
+                        f"| [GIF]({run['animation_path']}) | {mp4_link} |\n"
+                    )
+                f.write("\n\n## Metadata Filenames\n\n")
+                for run in animated_runs:
+                    f.write(f"- `{run['run_id']}`: `{run['filename_base']}`\n")
+
+    # Generate visual report
+    if render:
         report_md = render_matrix_visual_report_md(
             exp_dir,
             global_summary=global_summary,
             results_csv_path=csv_path,
             plots=plots,
         )
+        # Add link to animations if generated
+        if animated_runs:
+            report_md += "\n## Animations\n\n"
+            report_md += "See [animations.md](animations.md) for animated visualizations "
+            report_md += f"of the top {len(animated_runs)} runs.\n"
         report_path = artifacts_dir / "report.md"
         with report_path.open("w", encoding="utf-8") as f:
             f.write(report_md)
@@ -1335,7 +1655,11 @@ def generate_readme(
 
 
 def run_single_mode(
-    args: argparse.Namespace, exp_dir: Path, *, render: bool = True
+    args: argparse.Namespace,
+    exp_dir: Path,
+    *,
+    render: bool = True,
+    animate: bool = False,
 ) -> dict[str, Any]:
     """Run single mode: execute one experiment.
 
@@ -1343,6 +1667,7 @@ def run_single_mode(
         args: Parsed command-line arguments.
         exp_dir: Experiment directory.
         render: Whether to generate plots and visual report.
+        animate: Whether to generate animated visualization.
 
     Returns:
         Summary dictionary with final metrics.
@@ -1353,10 +1678,11 @@ def run_single_mode(
     artifacts_dir = exp_dir / "artifacts"
     artifacts_dir.mkdir(parents=True, exist_ok=True)
 
-    # Run the experiment
-    summary = run_once(config, artifacts_dir, save_history=True)
+    # Run the experiment (with trace if animating)
+    summary = run_once(config, artifacts_dir, save_history=True, save_trace=animate)
 
     # Generate plots and report if rendering is enabled
+    plots: dict[str, Path] = {}
     if render:
         history_path = artifacts_dir / "history.jsonl"
         if history_path.exists():
@@ -1368,15 +1694,74 @@ def run_single_mode(
                 env=config.get("env", "single"),
             )
 
-            # Generate visual report
-            report_md = render_single_run_report_md(
-                exp_dir,
-                summary=summary,
-                plots=plots,
+    # Generate animation if requested
+    animation_path: Path | None = None
+    animation_mp4_path: Path | None = None
+    if animate:
+        trace_path = artifacts_dir / "trace.jsonl"
+        if trace_path.exists():
+            trace = read_trace_jsonl(trace_path)
+
+            # Build metadata-based filename
+            _, _, filename_base = build_metadata_strings(config)
+
+            # Standard animation paths
+            animation_path = artifacts_dir / "animation.gif"
+            animation_mp4_path = artifacts_dir / "animation.mp4"
+
+            # Also create metadata-named version
+            metadata_gif_path = artifacts_dir / f"{filename_base}.gif"
+            metadata_mp4_path = artifacts_dir / f"{filename_base}.mp4"
+
+            # Get comm_graph from summary if available
+            comm_graph = summary.get("comm_graph")
+
+            render_animation(
+                trace=trace,
+                out_gif=animation_path,
+                topology=config.get("topology"),
+                fps=getattr(args, "animate_fps", 8),
+                max_steps=getattr(args, "animate_max_steps", 200),
+                title=config.get("exp_name", exp_dir.name),
+                config=config,
+                comm_graph=comm_graph,
+                out_mp4=animation_mp4_path,
             )
-            report_path = artifacts_dir / "report.md"
-            with report_path.open("w", encoding="utf-8") as f:
-                f.write(report_md)
+
+            # Create symlinks or copies with metadata names
+            if animation_path.exists() and not metadata_gif_path.exists():
+                try:
+                    metadata_gif_path.symlink_to(animation_path.name)
+                except OSError:
+                    # Fall back to copy if symlink fails
+                    import shutil
+
+                    shutil.copy(animation_path, metadata_gif_path)
+
+            if animation_mp4_path.exists() and not metadata_mp4_path.exists():
+                try:
+                    metadata_mp4_path.symlink_to(animation_mp4_path.name)
+                except OSError:
+                    import shutil
+
+                    shutil.copy(animation_mp4_path, metadata_mp4_path)
+
+    # Generate visual report
+    if render:
+        report_md = render_single_run_report_md(
+            exp_dir,
+            summary=summary,
+            plots=plots,
+        )
+        # Add animation link if generated
+        if animation_path and animation_path.exists():
+            report_md += "\n## Animation\n\n"
+            report_md += "[View Animation (GIF)](animation.gif)\n"
+            if animation_mp4_path and animation_mp4_path.exists():
+                report_md += "\n[View Animation (MP4)](animation.mp4)\n"
+        report_path = artifacts_dir / "report.md"
+        with report_path.open("w", encoding="utf-8") as f:
+            f.write(report_md)
 
     return summary
 
@@ -1439,13 +1824,14 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     # Determine if rendering is enabled (default: True)
     render = not getattr(args, "no_render", False)
+    animate = getattr(args, "animate", False)
 
     # Run based on mode
     checks_passed = True
     if args.mode == "single":
-        summary = run_single_mode(args, exp_dir, render=render)
+        summary = run_single_mode(args, exp_dir, render=render, animate=animate)
     elif args.mode == "matrix":
-        summary = run_matrix_mode(args, exp_dir, render=render)
+        summary = run_matrix_mode(args, exp_dir, render=render, animate=animate)
     else:  # checks mode
         summary, checks_passed = run_checks_mode(args, exp_dir)
 
