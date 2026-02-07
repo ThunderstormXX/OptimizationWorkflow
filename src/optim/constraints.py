@@ -2,7 +2,8 @@
 
 This module provides constraint set implementations that satisfy the
 ConstraintSet protocol, including:
-- L2BallConstraint: Euclidean ball {x : ||x|| <= radius}
+- L1BallConstraint: L1 ball {x : ||x||_1 <= radius}
+- L2BallConstraint: Euclidean ball {x : ||x||_2 <= radius}
 - SimplexConstraint: Probability simplex {x : x >= 0, sum(x) = 1}
 """
 
@@ -14,7 +15,86 @@ import numpy as np
 
 from core.types import ParamVector
 
-__all__ = ["L2BallConstraint", "SimplexConstraint"]
+__all__ = ["L1BallConstraint", "L2BallConstraint", "SimplexConstraint"]
+
+
+@dataclass(frozen=True)
+class L1BallConstraint:
+    """L1 ball constraint set: {x : ||x||_1 <= radius}.
+
+    This constraint set represents the L1 ball centered at the origin
+    with the given radius. It supports both the Linear Minimization Oracle
+    (LMO) and projection operations.
+
+    Attributes:
+        radius: The radius of the ball. Must be positive.
+    """
+
+    radius: float
+
+    def __post_init__(self) -> None:
+        """Validate that radius is positive."""
+        if self.radius <= 0:
+            raise ValueError(f"radius must be positive, got {self.radius}")
+
+    def lmo(self, grad: ParamVector) -> ParamVector:
+        """Linear Minimization Oracle for the L1 ball.
+
+        Solves: argmin_{s : ||s||_1 <= radius} <grad, s>
+
+        The solution is s = -radius * sign(grad[i]) * e_i where i = argmax(|grad|).
+
+        Args:
+            grad: Gradient direction.
+
+        Returns:
+            The minimizer on the constraint set boundary.
+        """
+        if np.all(grad == 0):
+            return np.zeros_like(grad, dtype=np.float64)
+
+        # Find index of maximum absolute gradient
+        i = int(np.argmax(np.abs(grad)))
+        result = np.zeros_like(grad, dtype=np.float64)
+        result[i] = -self.radius * np.sign(grad[i])
+        return result
+
+    def project(self, x: ParamVector) -> ParamVector:
+        """Project a point onto the L1 ball.
+
+        Uses the efficient O(n log n) algorithm.
+
+        Args:
+            x: Point to project.
+
+        Returns:
+            The projection of x onto the ball.
+        """
+        x_norm = float(np.linalg.norm(x, ord=1))
+        if x_norm <= self.radius:
+            return np.array(x, dtype=np.float64, copy=True)
+
+        # Soft thresholding: find threshold mu such that ||S_mu(x)||_1 = radius
+        # where S_mu(x)_i = sign(x_i) * max(|x_i| - mu, 0)
+        abs_x = np.abs(x)
+        sorted_abs = np.sort(abs_x)[::-1]  # Descending order
+
+        # Find the threshold
+        cumsum = np.cumsum(sorted_abs)
+        n_nonzero = np.arange(1, len(sorted_abs) + 1)
+        mu_candidates = (cumsum - self.radius) / n_nonzero
+
+        # Find smallest index where sorted_abs[i] > mu_candidates[i]
+        valid = sorted_abs > mu_candidates
+        if np.any(valid):
+            k = np.where(valid)[0][-1]
+            mu = mu_candidates[k]
+        else:
+            mu = 0.0
+
+        # Soft thresholding
+        result = np.sign(x) * np.maximum(abs_x - mu, 0)
+        return result.astype(np.float64)  # type: ignore[no-any-return]
 
 
 @dataclass(frozen=True)

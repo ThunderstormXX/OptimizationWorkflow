@@ -1,0 +1,13 @@
+run_id,task,model,env,n_nodes,topology,strategy,optimizer,lr,constraint,schedule,gamma,radius,heterogeneity,dim,cond,seed,steps,final_mean_loss,final_mean_accuracy,final_suboptimality,final_consensus_error,final_dist_to_opt
+run_0000,logistic,NumpyVector,gossip,4,ring,local_then_gossip,fw,0.1,l2ball,harmonic,0.2,1.0,iid,5,na,0,10,0.6183998251338712,0.6799999999999999,,0.049873749582072816,
+run_0001,logistic,NumpyVector,gossip,4,ring,local_then_gossip,fw,0.1,l2ball,constant,0.2,1.0,iid,5,na,0,10,0.6195924796555323,0.6799999999999999,,0.054347206328284145,
+run_0002,logistic,NumpyVector,gossip,4,ring,gossip_then_local,fw,0.1,l2ball,harmonic,0.2,1.0,iid,5,na,0,10,0.6170448018682806,0.6639999999999999,,0.1496221547067102,
+run_0003,logistic,NumpyVector,gossip,4,ring,gossip_then_local,fw,0.1,l2ball,constant,0.2,1.0,iid,5,na,0,10,0.6183669769520739,0.6659999999999999,,0.1630435452294408,
+run_0004,logistic,NumpyVector,gossip,4,complete,local_then_gossip,fw,0.1,l2ball,harmonic,0.2,1.0,iid,5,na,0,10,0.6179033553490386,0.6839999999999999,,0.0,
+run_0005,logistic,NumpyVector,gossip,4,complete,local_then_gossip,fw,0.1,l2ball,constant,0.2,1.0,iid,5,na,0,10,0.6191610541420776,0.6839999999999999,,0.0,
+run_0006,logistic,NumpyVector,gossip,4,complete,gossip_then_local,fw,0.1,l2ball,harmonic,0.2,1.0,iid,5,na,0,10,0.6164401256335015,0.6759999999999999,,0.15177168283064138,
+run_0007,logistic,NumpyVector,gossip,4,complete,gossip_then_local,fw,0.1,l2ball,constant,0.2,1.0,iid,5,na,0,10,0.6178548732691407,0.6659999999999999,,0.1657285711157903,
+run_0008,logistic,NumpyVector,gossip,4,ring,local_then_gossip,pgd,0.1,l2ball,na,0.2,1.0,iid,5,na,0,10,0.678569229184909,0.6499999999999999,,0.006131540014806997,
+run_0009,logistic,NumpyVector,gossip,4,ring,gossip_then_local,pgd,0.1,l2ball,na,0.2,1.0,iid,5,na,0,10,0.6781054210091223,0.646,,0.018399297162999175,
+run_0010,logistic,NumpyVector,gossip,4,complete,local_then_gossip,pgd,0.1,l2ball,na,0.2,1.0,iid,5,na,0,10,0.6786123167795131,0.6379999999999999,,0.0,
+run_0011,logistic,NumpyVector,gossip,4,complete,gossip_then_local,pgd,0.1,l2ball,na,0.2,1.0,iid,5,na,0,10,0.6781084424406314,0.6459999999999999,,0.01725521120646378,

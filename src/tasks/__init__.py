@@ -6,6 +6,7 @@ including data sampling, loss computation, and metrics.
 Available tasks:
 - SyntheticQuadraticTask: Quadratic optimization (f(x) = 0.5 x^T A x - b^T x)
 - LogisticRegressionTask: Binary classification with logistic regression
+- MNISTClassificationTask: MNIST digit classification (requires torch)
 """
 
 from __future__ import annotations
@@ -16,6 +17,17 @@ from tasks.logistic_regression import (
     NodeDataset,
     make_logistic_data,
     split_across_nodes,
+)
+from tasks.mnist import (
+    TORCH_AVAILABLE,
+    MNISTClassificationTask,
+    MNISTSupervisedTask,
+    MNISTTinyDataset,
+    TorchGradComputer,
+    load_mnist,
+    load_mnist_or_fake,
+    load_mnist_tiny,
+    split_mnist_across_nodes,
 )
 from tasks.synthetic_quadratic import (
     QuadraticGradComputer,
@@ -36,4 +48,14 @@ __all__ = [
     "NodeDataset",
     "make_logistic_data",
     "split_across_nodes",
+    # MNIST task
+    "MNISTClassificationTask",
+    "MNISTSupervisedTask",
+    "MNISTTinyDataset",
+    "TorchGradComputer",
+    "load_mnist",
+    "load_mnist_or_fake",
+    "load_mnist_tiny",
+    "split_mnist_across_nodes",
+    "TORCH_AVAILABLE",
 ]

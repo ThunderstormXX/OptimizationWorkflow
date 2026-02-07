@@ -1,0 +1,44 @@
+{
+  "batch_size": 128,
+  "comm_graph": {
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "weights": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ]
+  },
+  "constraint": "l2ball",
+  "device": "cpu",
+  "env": "gossip",
+  "final_consensus_error": 9.575401732462258e-11,
+  "final_mean_accuracy": 0.928,
+  "final_mean_loss": 0.11604349811871846,
+  "heterogeneity": "iid",
+  "hidden": 256,
+  "lr": 0.001,
+  "model": "mlp3",
+  "n_nodes": 3,
+  "n_train": 3000,
+  "n_val": 1000,
+  "optimizer": "adam",
+  "radius": 19.821344566104102,
+  "seed": 0,
+  "steps": 100,
+  "strategy": "local_then_gossip",
+  "task": "mnist",
+  "topology": "complete"
+}

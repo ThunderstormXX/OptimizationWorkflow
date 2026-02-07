@@ -1,0 +1,18 @@
+{
+  "averages": {
+    "mean_final_accuracy": 0.6649999999999999,
+    "mean_final_consensus_error": 0.0646810798481008,
+    "mean_final_mean_loss": 0.6381799084514743
+  },
+  "best_by_final_mean_loss": {
+    "final_mean_loss": 0.6164401256335015,
+    "optimizer": "fw",
+    "run_id": "run_0006",
+    "seed": 0,
+    "step_schedule": "harmonic",
+    "strategy": "gossip_then_local",
+    "topology": "complete"
+  },
+  "number_of_runs": 12,
+  "runs_directory": "workflow/exp_0012/artifacts/runs"
+}

@@ -541,13 +541,155 @@ def render_matrix_visual_report_md(
         lines.append(f"- **Final mean loss**: {best_loss.get('final_mean_loss', 0):.6f}")
         lines.append("")
 
+    # Check for multiple models
+    models = {row.get("model", "NumpyVector") for row in rows}
+    has_multiple_models = len(models) > 1
+
+    # Check for accuracy metric
+    has_accuracy = any(row.get("final_mean_accuracy", "") not in ("", "N/A") for row in rows)
+
+    # Best run per model (if multiple models)
+    if has_multiple_models:
+        lines.append("## Best Run per Model")
+        lines.append("")
+        lines.append(
+            "| Model | Run ID | Optimizer | Constraint | Radius | Topology | Strategy | "
+            "Accuracy | Loss |"
+        )
+        lines.append(
+            "|-------|--------|-----------|------------|--------|----------|----------|"
+            "----------|------|"
+        )
+
+        for model in sorted(models):
+            model_rows = [r for r in rows if r.get("model", "NumpyVector") == model]
+            if not model_rows:
+                continue
+
+            # Sort by accuracy (desc) then loss (asc)
+            if has_accuracy:
+                model_rows_sorted = sorted(
+                    model_rows,
+                    key=lambda r: (
+                        -float(r.get("final_mean_accuracy", 0))
+                        if r.get("final_mean_accuracy", "") not in ("", "N/A")
+                        else 0,
+                        float(r.get("final_mean_loss", float("inf")))
+                        if r.get("final_mean_loss", "") not in ("", "N/A")
+                        else float("inf"),
+                    ),
+                )
+            else:
+                model_rows_sorted = sorted(
+                    model_rows,
+                    key=lambda r: float(r.get("final_mean_loss", float("inf")))
+                    if r.get("final_mean_loss", "") not in ("", "N/A")
+                    else float("inf"),
+                )
+
+            best = model_rows_sorted[0]
+            run_id = best.get("run_id", "N/A")
+            optimizer = best.get("optimizer", "N/A")
+            constraint = best.get("constraint", "N/A")
+            radius = best.get("radius", "N/A")
+            topology = best.get("topology", "N/A")
+            strategy = best.get("strategy", "N/A")
+
+            acc_val = best.get("final_mean_accuracy", "")
+            acc_str = f"{float(acc_val):.4f}" if acc_val not in ("", "N/A") else "N/A"
+
+            loss_val = best.get("final_mean_loss", "")
+            loss_str = f"{float(loss_val):.4f}" if loss_val not in ("", "N/A") else "N/A"
+
+            lines.append(
+                f"| {model} | `{run_id}` | {optimizer} | {constraint} | {radius} | "
+                f"{topology} | {strategy} | {acc_str} | {loss_str} |"
+            )
+
+        lines.append("")
+
+    # Best run per optimizer
+    optimizers = {row.get("optimizer", "N/A") for row in rows}
+    if len(optimizers) > 1:
+        lines.append("## Best Run per Optimizer")
+        lines.append("")
+        lines.append(
+            "| Optimizer | Run ID | Model | Constraint | Radius | Topology | Strategy | "
+            "Accuracy | Loss |"
+        )
+        lines.append(
+            "|-----------|--------|-------|------------|--------|----------|----------|"
+            "----------|------|"
+        )
+
+        for opt in sorted(optimizers):
+            opt_rows = [r for r in rows if r.get("optimizer", "N/A") == opt]
+            if not opt_rows:
+                continue
+
+            # Sort by accuracy (desc) then loss (asc)
+            if has_accuracy:
+                opt_rows_sorted = sorted(
+                    opt_rows,
+                    key=lambda r: (
+                        -float(r.get("final_mean_accuracy", 0))
+                        if r.get("final_mean_accuracy", "") not in ("", "N/A")
+                        else 0,
+                        float(r.get("final_mean_loss", float("inf")))
+                        if r.get("final_mean_loss", "") not in ("", "N/A")
+                        else float("inf"),
+                    ),
+                )
+            else:
+                opt_rows_sorted = sorted(
+                    opt_rows,
+                    key=lambda r: float(r.get("final_mean_loss", float("inf")))
+                    if r.get("final_mean_loss", "") not in ("", "N/A")
+                    else float("inf"),
+                )
+
+            best = opt_rows_sorted[0]
+            run_id = best.get("run_id", "N/A")
+            model = best.get("model", "NumpyVector")
+            constraint = best.get("constraint", "N/A")
+            radius = best.get("radius", "N/A")
+            topology = best.get("topology", "N/A")
+            strategy = best.get("strategy", "N/A")
+
+            acc_val = best.get("final_mean_accuracy", "")
+            acc_str = f"{float(acc_val):.4f}" if acc_val not in ("", "N/A") else "N/A"
+
+            loss_val = best.get("final_mean_loss", "")
+            loss_str = f"{float(loss_val):.4f}" if loss_val not in ("", "N/A") else "N/A"
+
+            lines.append(
+                f"| {opt} | `{run_id}` | {model} | {constraint} | {radius} | "
+                f"{topology} | {strategy} | {acc_str} | {loss_str} |"
+            )
+
+        lines.append("")
+
     # Top-10 runs table
     lines.append("## Top 10 Runs")
     lines.append("")
 
     # Determine sort key based on task
     has_subopt = any(row.get("final_suboptimality", "") not in ("", "N/A") for row in rows)
-    if has_subopt:
+    if has_accuracy:
+        # For tasks with accuracy, sort by accuracy (desc) then loss (asc)
+        sorted_rows = sorted(
+            rows,
+            key=lambda r: (
+                -float(r.get("final_mean_accuracy", 0))
+                if r.get("final_mean_accuracy", "") not in ("", "N/A")
+                else 0,
+                float(r.get("final_mean_loss", float("inf")))
+                if r.get("final_mean_loss", "") not in ("", "N/A")
+                else float("inf"),
+            ),
+        )
+        sort_key = "Accuracy"
+    elif has_subopt:
         sorted_rows = sorted(
             rows,
             key=lambda r: float(r.get("final_suboptimality", float("inf")))
@@ -564,23 +706,29 @@ def render_matrix_visual_report_md(
         )
         sort_key = "Mean Loss"
 
-    lines.append(f"| Rank | Run ID | Optimizer | Strategy | Topology | Seed | {sort_key} |")
-    lines.append("|------|--------|-----------|----------|----------|------|------------|")
+    # Include model and optimizer columns
+    lines.append(f"| Rank | Run ID | Model | Optimizer | Strategy | Topology | Seed | {sort_key} |")
+    lines.append("|------|--------|-------|-----------|----------|----------|------|------------|")
 
     for i, row in enumerate(sorted_rows[:10], 1):
         run_id = row.get("run_id", "N/A")
+        model = row.get("model", "NumpyVector")
         optimizer = row.get("optimizer", "N/A")
         strategy = row.get("strategy", "N/A")
         topology = row.get("topology", "N/A")
         seed = row.get("seed", "N/A")
-        if has_subopt:
+        if has_accuracy:
+            val = row.get("final_mean_accuracy", "N/A")
+            val_str = f"{float(val):.4f}" if val not in ("", "N/A") else "N/A"
+        elif has_subopt:
             val = row.get("final_suboptimality", "N/A")
             val_str = f"{float(val):.6f}" if val not in ("", "N/A") else "N/A"
         else:
             val = row.get("final_mean_loss", "N/A")
             val_str = f"{float(val):.6f}" if val not in ("", "N/A") else "N/A"
         row_line = (
-            f"| {i} | `{run_id}` | {optimizer} | {strategy} | {topology} | {seed} | {val_str} |"
+            f"| {i} | `{run_id}` | {model} | {optimizer} | {strategy} | "
+            f"{topology} | {seed} | {val_str} |"
         )
         lines.append(row_line)
 
@@ -731,6 +879,41 @@ def render_matrix_visual_report_md(
             lines.append(f"![Loss by Optimizer]({rel_path})")
             lines.append("")
 
+        if "bar_final_loss_by_model" in plots:
+            rel_path = plots["bar_final_loss_by_model"].relative_to(artifacts_dir)
+            lines.append("### Final Loss by Model")
+            lines.append("")
+            lines.append(f"![Loss by Model]({rel_path})")
+            lines.append("")
+
+        if "bar_final_loss_by_model_optimizer" in plots:
+            rel_path = plots["bar_final_loss_by_model_optimizer"].relative_to(artifacts_dir)
+            lines.append("### Final Loss by Model + Optimizer")
+            lines.append("")
+            lines.append(f"![Loss by Model+Optimizer]({rel_path})")
+            lines.append("")
+
+        if "bar_final_accuracy_by_optimizer" in plots:
+            rel_path = plots["bar_final_accuracy_by_optimizer"].relative_to(artifacts_dir)
+            lines.append("### Final Accuracy by Optimizer")
+            lines.append("")
+            lines.append(f"![Accuracy by Optimizer]({rel_path})")
+            lines.append("")
+
+        if "bar_final_accuracy_by_model" in plots:
+            rel_path = plots["bar_final_accuracy_by_model"].relative_to(artifacts_dir)
+            lines.append("### Final Accuracy by Model")
+            lines.append("")
+            lines.append(f"![Accuracy by Model]({rel_path})")
+            lines.append("")
+
+        if "bar_final_accuracy_by_model_optimizer" in plots:
+            rel_path = plots["bar_final_accuracy_by_model_optimizer"].relative_to(artifacts_dir)
+            lines.append("### Final Accuracy by Model + Optimizer")
+            lines.append("")
+            lines.append(f"![Accuracy by Model+Optimizer]({rel_path})")
+            lines.append("")
+
         if "bar_final_suboptimality_by_optimizer" in plots:
             rel_path = plots["bar_final_suboptimality_by_optimizer"].relative_to(artifacts_dir)
             lines.append("### Final Suboptimality by Optimizer")
@@ -757,6 +940,68 @@ def render_matrix_visual_report_md(
             lines.append("### Final Loss by Optimizer + Strategy")
             lines.append("")
             lines.append(f"![Loss by Optimizer+Strategy]({rel_path})")
+            lines.append("")
+
+        if "bar_final_accuracy_by_topology_strategy" in plots:
+            rel_path = plots["bar_final_accuracy_by_topology_strategy"].relative_to(artifacts_dir)
+            lines.append("### Final Accuracy by Topology + Strategy")
+            lines.append("")
+            lines.append(f"![Accuracy by Topology+Strategy]({rel_path})")
+            lines.append("")
+
+        if "bar_final_accuracy_by_model_constraint" in plots:
+            rel_path = plots["bar_final_accuracy_by_model_constraint"].relative_to(artifacts_dir)
+            lines.append("### Final Accuracy by Model + Constraint")
+            lines.append("")
+            lines.append(f"![Accuracy by Model+Constraint]({rel_path})")
+            lines.append("")
+
+        if "bar_final_accuracy_by_constraint" in plots:
+            rel_path = plots["bar_final_accuracy_by_constraint"].relative_to(artifacts_dir)
+            lines.append("### Final Accuracy by Constraint")
+            lines.append("")
+            lines.append(f"![Accuracy by Constraint]({rel_path})")
+            lines.append("")
+
+        if "bar_final_accuracy_by_heterogeneity" in plots:
+            rel_path = plots["bar_final_accuracy_by_heterogeneity"].relative_to(artifacts_dir)
+            lines.append("### Final Accuracy by Heterogeneity")
+            lines.append("")
+            lines.append(f"![Accuracy by Heterogeneity]({rel_path})")
+            lines.append("")
+
+    # Sanity targets section for MNIST
+    task = global_summary.get("task", "quadratic")
+    if task == "mnist" and has_accuracy:
+        lines.append("## Sanity Targets")
+        lines.append("")
+
+        # Find best accuracy
+        acc_vals = [
+            float(r.get("final_mean_accuracy", 0))
+            for r in rows
+            if r.get("final_mean_accuracy", "") not in ("", "N/A")
+        ]
+        if acc_vals:
+            best_acc = max(acc_vals)
+            target_acc = 0.90
+            status = "✅ PASSED" if best_acc >= target_acc else "❌ FAILED"
+
+            lines.append(f"**MNIST Baseline Accuracy Target**: {status}")
+            lines.append("")
+            lines.append(f"- **Best validation accuracy**: {best_acc:.4f}")
+            lines.append(f"- **Target**: ≥ {target_acc:.2f}")
+            lines.append("")
+
+            if best_acc >= target_acc:
+                lines.append(
+                    "The best run achieves the target accuracy of 90% on MNIST validation set."
+                )
+            else:
+                lines.append(
+                    f"⚠️ The best run ({best_acc:.4f}) does not reach the target accuracy "
+                    f"({target_acc:.2f}). Consider increasing steps or adjusting hyperparameters."
+                )
             lines.append("")
 
     return "\n".join(lines)

@@ -1,0 +1,38 @@
+[
+  {
+    "name": "AdamW",
+    "class": "torch.optim.AdamW",
+    "params": {
+      "lr": 0.001,
+      "weight_decay": 0.01
+    }
+  },
+  {
+    "name": "Muon",
+    "class": "optim.muon.Muon",
+    "params": {
+      "lr": 0.01,
+      "beta": 0.9
+    }
+  },
+  {
+    "name": "StochasticFrankWolfe",
+    "class": "optim.stochastic_frank_wolfe.StochasticFrankWolfe",
+    "params": {
+      "constraint": {
+        "class": "optim.constraints.L2BallConstraint",
+        "params": {
+          "radius": "auto"
+        }
+      },
+      "step_size": "harmonic"
+    }
+  },
+  {
+    "name": "GD",
+    "class": "optim.torch_gd.TorchGD",
+    "params": {
+      "lr": 0.1
+    }
+  }
+]

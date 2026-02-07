@@ -1,0 +1,58 @@
+{
+  "batch_size": 64,
+  "comm_graph": {
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ]
+    ],
+    "weights": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ]
+  },
+  "constraint": "l2ball",
+  "dim": 10,
+  "env": "gossip",
+  "final_consensus_error": 0.009777982434962132,
+  "final_mean_accuracy": 0.7002002002002001,
+  "final_mean_loss": 0.6088180031403947,
+  "gamma": 0.2,
+  "heterogeneity": "label_skew",
+  "lr": 0.1,
+  "n_nodes": 6,
+  "n_samples": 2000,
+  "optimizer": "gd",
+  "radius": 1.0,
+  "seed": 0,
+  "step_schedule": "na",
+  "steps": 30,
+  "strategy": "local_then_gossip",
+  "task": "logistic",
+  "topology": "ring"
+}

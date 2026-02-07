@@ -1,0 +1,21 @@
+{
+  "experiment": {
+    "class": "experiments.base_training.ExperimentBaseTraining",
+    "params": {
+      "task_dirs": ["configs/tasks/mnist_cnn"],
+      "trainer": {
+        "class": "trainers.supervised.SupervisedTrainer",
+        "params": {
+          "epochs": 10,
+          "device": "auto",
+          "progress": true,
+          "val_every": 1,
+          "test_every": 1
+        }
+      },
+      "workflow_dir": "workflow/frankwolfe",
+      "num_runs": 10,
+      "seed": 0
+    }
+  }
+}

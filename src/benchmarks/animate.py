@@ -28,8 +28,10 @@ matplotlib.use("Agg")
 
 __all__ = [
     "build_metadata_strings",
+    "check_ffmpeg_available",
     "read_trace_jsonl",
     "render_animation",
+    "render_animation_legacy",
     "write_trace_line",
 ]
 
@@ -47,8 +49,8 @@ def build_metadata_strings(config: dict[str, Any]) -> tuple[str, str, str]:
 
     Returns:
         Tuple of (title_line1, title_line2, filename_base).
-        - title_line1: Dataset | Model | Task formulation
-        - title_line2: env/topo/strat/opt/constraint details
+        - title_line1: Dataset | Model | Optimizer | Constraint
+        - title_line2: env/topo/strat/seed/steps details
         - filename_base: Safe filename with metadata
     """
     task = config.get("task", "quadratic")
@@ -61,46 +63,42 @@ def build_metadata_strings(config: dict[str, Any]) -> tuple[str, str, str]:
     else:
         dataset_name = "SyntheticQuadratic"
 
-    # Model name
-    if task == "mnist":
-        model_name = "MLP3(h=256)"
-    else:
-        model_name = "NumpyVector"
+    # Model name - use explicit model from config if available
+    model_name = config.get("model", "NumpyVector")
+    if model_name == "NumpyVector" and task == "mnist":
+        model_name = config.get("model", "mlp3")
 
-    # Task formulation
-    if task in ("mnist", "logistic"):
-        task_formulation = "classification"
-    else:
-        task_formulation = "convex quadratic"
+    # Optimizer name (uppercase for visibility)
+    optimizer = config.get("optimizer", "gd").upper()
 
     # Environment details
     env = config.get("env", "single")
-    topology = config.get("topology", "none")
-    strategy = config.get("strategy", "none")
-    optimizer = config.get("optimizer", "gd")
+    topology = config.get("topology", "na")
+    strategy = config.get("strategy", "na")
     seed = config.get("seed", 0)
     steps = config.get("steps", 0)
+    heterogeneity = config.get("heterogeneity", "na")
 
     # Constraint string
     constraint = config.get("constraint", "none")
     radius = config.get("radius", 0.0)
-    if constraint == "l1":
+    if constraint in ("l1", "l1ball"):
         constraint_str = f"L1(R={radius})"
-    elif constraint == "l2":
+    elif constraint in ("l2", "l2ball"):
         constraint_str = f"L2(R={radius})"
     else:
         constraint_str = "none"
 
-    # Build title lines
-    title_line1 = f"{dataset_name} | {model_name} | {task_formulation}"
+    # Build title lines - optimizer and model prominent
+    title_line1 = f"{dataset_name} | {model_name} | {optimizer} | {constraint_str}"
     title_line2 = (
         f"env={env} topo={topology} strat={strategy} "
-        f"opt={optimizer} constraint={constraint_str} seed={seed} steps={steps}"
+        f"hetero={heterogeneity} seed={seed} steps={steps}"
     )
 
     # Build filename base (safe characters only)
     filename_base = (
-        f"animation__{dataset_name}__{model_name}__{env}__{topology}"
+        f"animation__{dataset_name}__{model_name}__{optimizer}__{env}__{topology}"
         f"__{strategy}__{constraint_str.replace('(', '').replace(')', '').replace('=', '')}"
     )
     # Clean up filename
@@ -297,9 +295,23 @@ def _render_frame(
     has_suboptimality = "suboptimality" in mean_metrics
     has_consensus = "consensus_error" in mean_metrics
 
-    # Two-line title banner
+    # Build current metrics string for overlay
+    loss_val = mean_metrics.get("mean_loss", 0)
+    metrics_parts = [f"t={t}", f"loss={loss_val:.3f}"]
+    if has_accuracy:
+        acc_val = mean_metrics.get("mean_accuracy", 0)
+        metrics_parts.append(f"acc={acc_val:.3f}")
+    if has_consensus:
+        cons_val = mean_metrics.get("consensus_error", 0)
+        metrics_parts.append(f"cons={cons_val:.4f}")
+    if has_suboptimality:
+        subopt_val = mean_metrics.get("suboptimality", 0)
+        metrics_parts.append(f"subopt={subopt_val:.4f}")
+    metrics_str = " | ".join(metrics_parts)
+
+    # Three-line title banner with current metrics
     fig.suptitle(
-        f"{title_line1}\n{title_line2}\nstep {t}/{trace[-1]['t']}",
+        f"{title_line1}\n{title_line2}\n{metrics_str}",
         fontsize=9,
         y=0.98,
     )
@@ -604,36 +616,53 @@ def _draw_consensus_curve(ax: Any, trace: list[dict[str, Any]], current_idx: int
 # =============================================================================
 
 
+def check_ffmpeg_available() -> bool:
+    """Check if ffmpeg is available on the system."""
+    import shutil
+
+    return shutil.which("ffmpeg") is not None
+
+
 def render_animation(
     *,
     trace: list[dict[str, Any]],
-    out_gif: Path,
+    out_path: Path,
     topology: str | None,
     fps: int,
     max_steps: int,
     title: str,
     config: dict[str, Any],
     comm_graph: dict[str, Any] | None = None,
-    out_mp4: Path | None = None,
+    output_format: str = "mp4",
 ) -> None:
-    """Render an animated GIF (and optionally MP4) from trace data.
+    """Render an animated video (MP4 or GIF) from trace data.
 
     Args:
         trace: List of trace records (one per step).
-        out_gif: Output path for the GIF file.
+        out_path: Output path for the animation file.
         topology: Topology type for graph layout.
         fps: Frames per second.
         max_steps: Maximum number of frames (subsample if needed).
         title: Animation title (used if no metadata strings built).
         config: Configuration dictionary for banner.
         comm_graph: Optional communication graph with edges and weights.
-        out_mp4: Optional output path for MP4 file.
+        output_format: Output format ("mp4" or "gif"). Default is "mp4".
+
+    Raises:
+        RuntimeError: If MP4 format requested but ffmpeg is not available.
     """
     if not trace:
         return
 
+    # Validate format and check ffmpeg for MP4
+    if output_format == "mp4" and not check_ffmpeg_available():
+        raise RuntimeError(
+            "MP4 animation requires ffmpeg to be installed. "
+            "Install ffmpeg or use --animate-format gif"
+        )
+
     # Ensure output directory exists
-    out_gif.parent.mkdir(parents=True, exist_ok=True)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
 
     # Build metadata strings for title
     title_line1, title_line2, _ = build_metadata_strings(config)
@@ -666,16 +695,67 @@ def render_animation(
         buf.close()
         plt.close(fig)
 
-    # Write GIF (duration is in ms, so 1000/fps)
-    duration_ms = int(1000 / fps) if fps > 0 else 125
-    imageio.mimsave(str(out_gif), frames, duration=duration_ms, loop=0)
+    # Write animation based on format
+    if output_format == "mp4":
+        # Use imageio-ffmpeg for MP4
+        imageio.mimsave(
+            str(out_path),
+            frames,
+            fps=fps,
+            codec="libx264",
+            pixelformat="yuv420p",
+            quality=8,
+        )
+    else:
+        # Write GIF (duration is in ms, so 1000/fps)
+        duration_ms = int(1000 / fps) if fps > 0 else 125
+        imageio.mimsave(str(out_path), frames, duration=duration_ms, loop=0)
 
-    # Write MP4 if requested
+
+# Backward compatibility wrapper
+def render_animation_legacy(
+    *,
+    trace: list[dict[str, Any]],
+    out_gif: Path,
+    topology: str | None,
+    fps: int,
+    max_steps: int,
+    title: str,
+    config: dict[str, Any],
+    comm_graph: dict[str, Any] | None = None,
+    out_mp4: Path | None = None,
+) -> None:
+    """Legacy wrapper for backward compatibility.
+
+    Deprecated: Use render_animation with output_format parameter instead.
+    """
+    # Render GIF
+    render_animation(
+        trace=trace,
+        out_path=out_gif,
+        topology=topology,
+        fps=fps,
+        max_steps=max_steps,
+        title=title,
+        config=config,
+        comm_graph=comm_graph,
+        output_format="gif",
+    )
+
+    # Also render MP4 if requested
     if out_mp4 is not None:
-        out_mp4.parent.mkdir(parents=True, exist_ok=True)
         try:
-            # Use imageio-ffmpeg for MP4 if available
-            imageio.mimsave(str(out_mp4), frames, fps=fps, codec="libx264", quality=8)
-        except Exception:
-            # Fall back to GIF-only if ffmpeg not available
+            render_animation(
+                trace=trace,
+                out_path=out_mp4,
+                topology=topology,
+                fps=fps,
+                max_steps=max_steps,
+                title=title,
+                config=config,
+                comm_graph=comm_graph,
+                output_format="mp4",
+            )
+        except RuntimeError:
+            # ffmpeg not available, skip MP4
             pass

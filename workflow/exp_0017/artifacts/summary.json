@@ -1,0 +1,19 @@
+{
+  "batch_size": 32,
+  "constraint": "none",
+  "device": "cpu",
+  "env": "single",
+  "final_mean_accuracy": 0.1,
+  "final_mean_loss": 2.388427257537842,
+  "final_train_accuracy": 0.0625,
+  "hidden": 64,
+  "lr": 0.01,
+  "model": "mlp3",
+  "n_train": 200,
+  "n_val": 100,
+  "optimizer": "adam",
+  "radius": 1.0,
+  "seed": 0,
+  "steps": 10,
+  "task": "mnist"
+}

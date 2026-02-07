@@ -292,6 +292,10 @@ def plot_matrix_results(
 
     Creates bar charts showing mean±std grouped by various factors:
     - bar_final_loss_by_optimizer.png
+    - bar_final_loss_by_model.png (if multiple models)
+    - bar_final_loss_by_model_optimizer.png (if multiple models)
+    - bar_final_accuracy_by_optimizer.png (logistic only)
+    - bar_final_accuracy_by_model.png (logistic, if multiple models)
     - bar_final_suboptimality_by_optimizer.png (quadratic only)
     - bar_final_consensus_by_strategy.png (gossip only)
     - bar_final_loss_by_topology.png (gossip only)
@@ -314,6 +318,14 @@ def plot_matrix_results(
     # Check if gossip environment
     is_gossip = any(row.get("env") == "gossip" for row in rows)
 
+    # Check if multiple models present
+    models = {row.get("model", "NumpyVector") for row in rows}
+    has_multiple_models = len(models) > 1
+
+    # Check if logistic task (has accuracy)
+    is_logistic = task == "logistic"
+    has_accuracy = any(_safe_float(row.get("final_mean_accuracy")) is not None for row in rows)
+
     # Bar chart: final_mean_loss by optimizer
     stats = group_mean_std(rows, ["optimizer"], "final_mean_loss")
     if stats:
@@ -333,6 +345,113 @@ def plot_matrix_results(
         fig.savefig(path, dpi=100, bbox_inches="tight")
         plt.close(fig)
         created_plots["bar_final_loss_by_optimizer"] = path
+
+    # Bar chart: final_mean_loss by model (if multiple models)
+    if has_multiple_models:
+        stats = group_mean_std(rows, ["model"], "final_mean_loss")
+        if stats:
+            fig, ax = plt.subplots(figsize=(8, 5))
+            labels = [s[0] for s in stats]
+            means = [s[1] for s in stats]
+            stds = [s[2] for s in stats]
+            x = np.arange(len(labels))
+            ax.bar(x, means, yerr=stds, capsize=5, alpha=0.8)
+            ax.set_xticks(x)
+            ax.set_xticklabels(labels)
+            ax.set_xlabel("Model")
+            ax.set_ylabel("Final Mean Loss")
+            ax.set_title("Final Loss by Model (mean ± std)")
+            ax.grid(True, alpha=0.3, axis="y")
+            path = plots_dir / "bar_final_loss_by_model.png"
+            fig.savefig(path, dpi=100, bbox_inches="tight")
+            plt.close(fig)
+            created_plots["bar_final_loss_by_model"] = path
+
+        # Bar chart: final_mean_loss by (model, optimizer)
+        stats = group_mean_std(rows, ["model", "optimizer"], "final_mean_loss")
+        if stats and len(stats) <= 20:
+            fig, ax = plt.subplots(figsize=(12, 6))
+            labels = [s[0] for s in stats]
+            means = [s[1] for s in stats]
+            stds = [s[2] for s in stats]
+            x = np.arange(len(labels))
+            ax.bar(x, means, yerr=stds, capsize=3, alpha=0.8)
+            ax.set_xticks(x)
+            ax.set_xticklabels(labels, rotation=45, ha="right", fontsize=8)
+            ax.set_xlabel("Model / Optimizer")
+            ax.set_ylabel("Final Mean Loss")
+            ax.set_title("Final Loss by Model+Optimizer (mean ± std)")
+            ax.grid(True, alpha=0.3, axis="y")
+            path = plots_dir / "bar_final_loss_by_model_optimizer.png"
+            fig.savefig(path, dpi=100, bbox_inches="tight")
+            plt.close(fig)
+            created_plots["bar_final_loss_by_model_optimizer"] = path
+
+    # Accuracy plots (logistic/mnist)
+    if is_logistic or has_accuracy:
+        # Bar chart: final_mean_accuracy by optimizer
+        stats = group_mean_std(rows, ["optimizer"], "final_mean_accuracy")
+        if stats:
+            fig, ax = plt.subplots(figsize=(8, 5))
+            labels = [s[0] for s in stats]
+            means = [s[1] for s in stats]
+            stds = [s[2] for s in stats]
+            x = np.arange(len(labels))
+            ax.bar(x, means, yerr=stds, capsize=5, alpha=0.8, color="green")
+            ax.set_xticks(x)
+            ax.set_xticklabels(labels)
+            ax.set_xlabel("Optimizer")
+            ax.set_ylabel("Final Mean Accuracy")
+            ax.set_title("Final Accuracy by Optimizer (mean ± std)")
+            ax.set_ylim(0, 1.05)
+            ax.grid(True, alpha=0.3, axis="y")
+            path = plots_dir / "bar_final_accuracy_by_optimizer.png"
+            fig.savefig(path, dpi=100, bbox_inches="tight")
+            plt.close(fig)
+            created_plots["bar_final_accuracy_by_optimizer"] = path
+
+        # Bar chart: final_mean_accuracy by model (if multiple models)
+        if has_multiple_models:
+            stats = group_mean_std(rows, ["model"], "final_mean_accuracy")
+            if stats:
+                fig, ax = plt.subplots(figsize=(8, 5))
+                labels = [s[0] for s in stats]
+                means = [s[1] for s in stats]
+                stds = [s[2] for s in stats]
+                x = np.arange(len(labels))
+                ax.bar(x, means, yerr=stds, capsize=5, alpha=0.8, color="green")
+                ax.set_xticks(x)
+                ax.set_xticklabels(labels)
+                ax.set_xlabel("Model")
+                ax.set_ylabel("Final Mean Accuracy")
+                ax.set_title("Final Accuracy by Model (mean ± std)")
+                ax.set_ylim(0, 1.05)
+                ax.grid(True, alpha=0.3, axis="y")
+                path = plots_dir / "bar_final_accuracy_by_model.png"
+                fig.savefig(path, dpi=100, bbox_inches="tight")
+                plt.close(fig)
+                created_plots["bar_final_accuracy_by_model"] = path
+
+            # Bar chart: final_mean_accuracy by (model, optimizer)
+            stats = group_mean_std(rows, ["model", "optimizer"], "final_mean_accuracy")
+            if stats and len(stats) <= 20:
+                fig, ax = plt.subplots(figsize=(12, 6))
+                labels = [s[0] for s in stats]
+                means = [s[1] for s in stats]
+                stds = [s[2] for s in stats]
+                x = np.arange(len(labels))
+                ax.bar(x, means, yerr=stds, capsize=3, alpha=0.8, color="green")
+                ax.set_xticks(x)
+                ax.set_xticklabels(labels, rotation=45, ha="right", fontsize=8)
+                ax.set_xlabel("Model / Optimizer")
+                ax.set_ylabel("Final Mean Accuracy")
+                ax.set_title("Final Accuracy by Model+Optimizer (mean ± std)")
+                ax.set_ylim(0, 1.05)
+                ax.grid(True, alpha=0.3, axis="y")
+                path = plots_dir / "bar_final_accuracy_by_model_optimizer.png"
+                fig.savefig(path, dpi=100, bbox_inches="tight")
+                plt.close(fig)
+                created_plots["bar_final_accuracy_by_model_optimizer"] = path
 
     # Bar chart: final_suboptimality by optimizer (quadratic only)
     if task == "quadratic":
@@ -417,5 +536,92 @@ def plot_matrix_results(
             fig.savefig(path, dpi=100, bbox_inches="tight")
             plt.close(fig)
             created_plots["bar_final_loss_by_optimizer_strategy"] = path
+
+        # MNIST-specific: accuracy by topology+strategy
+        if has_accuracy:
+            stats = group_mean_std(rows, ["topology", "strategy"], "final_mean_accuracy")
+            if stats and len(stats) <= 20:
+                fig, ax = plt.subplots(figsize=(12, 6))
+                labels = [s[0] for s in stats]
+                means = [s[1] for s in stats]
+                stds = [s[2] for s in stats]
+                x = np.arange(len(labels))
+                ax.bar(x, means, yerr=stds, capsize=3, alpha=0.8, color="green")
+                ax.set_xticks(x)
+                ax.set_xticklabels(labels, rotation=45, ha="right", fontsize=8)
+                ax.set_xlabel("Topology / Strategy")
+                ax.set_ylabel("Final Mean Accuracy")
+                ax.set_title("Final Accuracy by Topology+Strategy (mean ± std)")
+                ax.set_ylim(0, 1.05)
+                ax.grid(True, alpha=0.3, axis="y")
+                path = plots_dir / "bar_final_accuracy_by_topology_strategy.png"
+                fig.savefig(path, dpi=100, bbox_inches="tight")
+                plt.close(fig)
+                created_plots["bar_final_accuracy_by_topology_strategy"] = path
+
+    # MNIST-specific plots: accuracy by constraint
+    if task == "mnist" and has_accuracy:
+        # Bar chart: accuracy by (model, constraint)
+        stats = group_mean_std(rows, ["model", "constraint"], "final_mean_accuracy")
+        if stats and len(stats) <= 20:
+            fig, ax = plt.subplots(figsize=(12, 6))
+            labels = [s[0] for s in stats]
+            means = [s[1] for s in stats]
+            stds = [s[2] for s in stats]
+            x = np.arange(len(labels))
+            ax.bar(x, means, yerr=stds, capsize=3, alpha=0.8, color="green")
+            ax.set_xticks(x)
+            ax.set_xticklabels(labels, rotation=45, ha="right", fontsize=8)
+            ax.set_xlabel("Model / Constraint")
+            ax.set_ylabel("Final Mean Accuracy")
+            ax.set_title("Final Accuracy by Model+Constraint (mean ± std)")
+            ax.set_ylim(0, 1.05)
+            ax.grid(True, alpha=0.3, axis="y")
+            path = plots_dir / "bar_final_accuracy_by_model_constraint.png"
+            fig.savefig(path, dpi=100, bbox_inches="tight")
+            plt.close(fig)
+            created_plots["bar_final_accuracy_by_model_constraint"] = path
+
+        # Bar chart: accuracy by constraint alone
+        stats = group_mean_std(rows, ["constraint"], "final_mean_accuracy")
+        if stats:
+            fig, ax = plt.subplots(figsize=(8, 5))
+            labels = [s[0] for s in stats]
+            means = [s[1] for s in stats]
+            stds = [s[2] for s in stats]
+            x = np.arange(len(labels))
+            ax.bar(x, means, yerr=stds, capsize=5, alpha=0.8, color="green")
+            ax.set_xticks(x)
+            ax.set_xticklabels(labels)
+            ax.set_xlabel("Constraint")
+            ax.set_ylabel("Final Mean Accuracy")
+            ax.set_title("Final Accuracy by Constraint (mean ± std)")
+            ax.set_ylim(0, 1.05)
+            ax.grid(True, alpha=0.3, axis="y")
+            path = plots_dir / "bar_final_accuracy_by_constraint.png"
+            fig.savefig(path, dpi=100, bbox_inches="tight")
+            plt.close(fig)
+            created_plots["bar_final_accuracy_by_constraint"] = path
+
+        # Bar chart: accuracy by heterogeneity
+        stats = group_mean_std(rows, ["heterogeneity"], "final_mean_accuracy")
+        if stats:
+            fig, ax = plt.subplots(figsize=(8, 5))
+            labels = [s[0] for s in stats]
+            means = [s[1] for s in stats]
+            stds = [s[2] for s in stats]
+            x = np.arange(len(labels))
+            ax.bar(x, means, yerr=stds, capsize=5, alpha=0.8, color="green")
+            ax.set_xticks(x)
+            ax.set_xticklabels(labels)
+            ax.set_xlabel("Heterogeneity")
+            ax.set_ylabel("Final Mean Accuracy")
+            ax.set_title("Final Accuracy by Heterogeneity (mean ± std)")
+            ax.set_ylim(0, 1.05)
+            ax.grid(True, alpha=0.3, axis="y")
+            path = plots_dir / "bar_final_accuracy_by_heterogeneity.png"
+            fig.savefig(path, dpi=100, bbox_inches="tight")
+            plt.close(fig)
+            created_plots["bar_final_accuracy_by_heterogeneity"] = path
 
     return created_plots

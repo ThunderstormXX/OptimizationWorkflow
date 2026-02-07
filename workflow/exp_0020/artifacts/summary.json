@@ -1,0 +1,23 @@
+{
+  "batch_size": 8,
+  "constraint": "none",
+  "device": "cpu",
+  "env": "gossip",
+  "final_consensus_error": 0.0,
+  "final_mean_accuracy": 0.15625,
+  "final_mean_loss": 2.3077014684677124,
+  "heterogeneity": "iid",
+  "hidden": 256,
+  "lr": 0.01,
+  "model": "cnn",
+  "n_nodes": 2,
+  "n_train": 60000,
+  "n_val": 10000,
+  "optimizer": "adam",
+  "radius": 1.0,
+  "seed": 0,
+  "steps": 3,
+  "strategy": "local_then_gossip",
+  "task": "mnist",
+  "topology": "ring"
+}
