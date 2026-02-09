@@ -1,0 +1,278 @@
+[
+  {
+    "name": "Scion[lr=0.00102,momentum=0.28,scale=2.98,weight_decay=0.01]",
+    "spec": {
+      "name": "Scion[lr=0.00102,momentum=0.28,scale=2.98,weight_decay=0.01]",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.001024381171013552,
+        "momentum": 0.28003915488498804,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 2.9798004099076327,
+        "unconstrained": false,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Scion/exp_0017",
+    "mean_val_acc": 0.6700000166893005,
+    "std_val_acc": 0.050000011920928955,
+    "mean_test_acc": 0.6599999964237213,
+    "std_test_acc": 0.030000001192092896,
+    "mean_val_loss": 1.863134741783142,
+    "mean_test_loss": 1.8577250242233276
+  },
+  {
+    "name": "Scion[lr=0.00083,momentum=0.187,scale=3.11,weight_decay=0.0001]",
+    "spec": {
+      "name": "Scion[lr=0.00083,momentum=0.187,scale=3.11,weight_decay=0.0001]",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.0008300388209325469,
+        "momentum": 0.18740779175675137,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 3.1134303769045664,
+        "unconstrained": false,
+        "weight_decay": 0.0001
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Scion/exp_0013",
+    "mean_val_acc": 0.6349999904632568,
+    "std_val_acc": 0.04500001668930054,
+    "mean_test_acc": 0.6299999952316284,
+    "std_test_acc": 0.04000002145767212,
+    "mean_val_loss": 1.8709901571273804,
+    "mean_test_loss": 1.8684572577476501
+  },
+  {
+    "name": "Scion[lr=0.000469,momentum=0.25,scale=3.87,weight_decay=0.0001]",
+    "spec": {
+      "name": "Scion[lr=0.000469,momentum=0.25,scale=3.87,weight_decay=0.0001]",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.00046884682161828857,
+        "momentum": 0.25022719274630706,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 3.874468340062098,
+        "unconstrained": false,
+        "weight_decay": 0.0001
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Scion/exp_0018",
+    "mean_val_acc": 0.5699999928474426,
+    "std_val_acc": 0.06999999284744263,
+    "mean_test_acc": 0.47999998927116394,
+    "std_test_acc": 0.09000000357627869,
+    "mean_val_loss": 1.8112205862998962,
+    "mean_test_loss": 1.8254979848861694
+  },
+  {
+    "name": "Scion[lr=0.000519,momentum=0.258,scale=7.03,weight_decay=0.01]",
+    "spec": {
+      "name": "Scion[lr=0.000519,momentum=0.258,scale=7.03,weight_decay=0.01]",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.0005194200266950688,
+        "momentum": 0.2583692799990368,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 7.030973724202692,
+        "unconstrained": false,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Scion/exp_0021",
+    "mean_val_acc": 0.5399999916553497,
+    "std_val_acc": 0.02000001072883606,
+    "mean_test_acc": 0.48999999463558197,
+    "std_test_acc": 0.08999998867511749,
+    "mean_val_loss": 1.7296889424324036,
+    "mean_test_loss": 2.0678340792655945
+  },
+  {
+    "name": "Scion[lr=0.000254,momentum=0.186,scale=2.75,weight_decay=0.01]",
+    "spec": {
+      "name": "Scion[lr=0.000254,momentum=0.186,scale=2.75,weight_decay=0.01]",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.00025368498522110935,
+        "momentum": 0.18605730632398798,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 2.747137121208383,
+        "unconstrained": false,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Scion/exp_0010",
+    "mean_val_acc": 0.3199999928474426,
+    "std_val_acc": 0.09999999403953552,
+    "mean_test_acc": 0.27000000327825546,
+    "std_test_acc": 0.03999999910593033,
+    "mean_val_loss": 2.1983537673950195,
+    "mean_test_loss": 2.2095584869384766
+  },
+  {
+    "name": "Scion[lr=0.000325,momentum=0.0578,scale=26.9,weight_decay=0.01]",
+    "spec": {
+      "name": "Scion[lr=0.000325,momentum=0.0578,scale=26.9,weight_decay=0.01]",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.00032497108229106704,
+        "momentum": 0.0577529378674375,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 26.916865121329984,
+        "unconstrained": false,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Scion/exp_0016",
+    "mean_val_acc": 0.3049999997019768,
+    "std_val_acc": 0.0650000050663948,
+    "mean_test_acc": 0.26500000059604645,
+    "std_test_acc": 0.08499999344348907,
+    "mean_val_loss": 799.5734252929688,
+    "mean_test_loss": 965.9873657226562
+  },
+  {
+    "name": "Scion[lr=0.000276,momentum=0.109,scale=49,weight_decay=0.01]",
+    "spec": {
+      "name": "Scion[lr=0.000276,momentum=0.109,scale=49,weight_decay=0.01]",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.0002758256757563636,
+        "momentum": 0.1085827402616741,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 49.00717577448082,
+        "unconstrained": false,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Scion/exp_0012",
+    "mean_val_acc": 0.2500000074505806,
+    "std_val_acc": 0.05000000447034836,
+    "mean_test_acc": 0.22999999672174454,
+    "std_test_acc": 0.08999999612569809,
+    "mean_val_loss": 10456.48779296875,
+    "mean_test_loss": 12609.0283203125
+  },
+  {
+    "name": "Scion[lr=0.000274,momentum=0.218,scale=18.1,weight_decay=0.001]",
+    "spec": {
+      "name": "Scion[lr=0.000274,momentum=0.218,scale=18.1,weight_decay=0.001]",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.00027434835718715057,
+        "momentum": 0.21801030828833928,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 18.06821192091247,
+        "unconstrained": false,
+        "weight_decay": 0.001
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Scion/exp_0020",
+    "mean_val_acc": 0.2500000074505806,
+    "std_val_acc": 0.05000000447034836,
+    "mean_test_acc": 0.2200000062584877,
+    "std_test_acc": 0.08000000566244125,
+    "mean_val_loss": 190.43844604492188,
+    "mean_test_loss": 230.65569305419922
+  },
+  {
+    "name": "Scion[lr=0.000248,momentum=0.0879,scale=35.5,weight_decay=0.01]",
+    "spec": {
+      "name": "Scion[lr=0.000248,momentum=0.0879,scale=35.5,weight_decay=0.01]",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.0002477584814394415,
+        "momentum": 0.08790559408822153,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 35.53374225739727,
+        "unconstrained": false,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Scion/exp_0014",
+    "mean_val_acc": 0.2150000035762787,
+    "std_val_acc": 0.034999996423721313,
+    "mean_test_acc": 0.19499999284744263,
+    "std_test_acc": 0.06499999761581421,
+    "mean_val_loss": 3194.7618408203125,
+    "mean_test_loss": 3820.4627685546875
+  },
+  {
+    "name": "Scion[lr=0.00116,momentum=0.0664,scale=0.531,weight_decay=0.01]",
+    "spec": {
+      "name": "Scion[lr=0.00116,momentum=0.0664,scale=0.531,weight_decay=0.01]",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.001156325299528024,
+        "momentum": 0.06638221480995328,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 0.5312586171050123,
+        "unconstrained": false,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Scion/exp_0011",
+    "mean_val_acc": 0.10999999940395355,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.10999999940395355,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 2.299689531326294,
+    "mean_test_loss": 2.3031005859375
+  },
+  {
+    "name": "Scion[lr=0.00182,momentum=0.218,scale=0.671,weight_decay=0]",
+    "spec": {
+      "name": "Scion[lr=0.00182,momentum=0.218,scale=0.671,weight_decay=0]",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.0018170407591621529,
+        "momentum": 0.21785286884239813,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 0.6714796892773248,
+        "unconstrained": false,
+        "weight_decay": 0.0
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Scion/exp_0015",
+    "mean_val_acc": 0.10999999940395355,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.10999999940395355,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 2.2982455492019653,
+    "mean_test_loss": 2.3029638528823853
+  },
+  {
+    "name": "Scion[lr=0.00311,momentum=0.0744,scale=0.935,weight_decay=0.0001]",
+    "spec": {
+      "name": "Scion[lr=0.00311,momentum=0.0744,scale=0.935,weight_decay=0.0001]",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.0031129209603542258,
+        "momentum": 0.0743635774327193,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 0.9352069480785328,
+        "unconstrained": false,
+        "weight_decay": 0.0001
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Scion/exp_0019",
+    "mean_val_acc": 0.10999999940395355,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.10999999940395355,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 2.289346933364868,
+    "mean_test_loss": 2.2952226400375366
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "name": "O-SGDM[radius_mult=0.297,ns_steps=5,step_size=0.00437,momentum=0.831,weight_decay=0.001]",
+  "spec": {
+    "name": "O-SGDM[radius_mult=0.297,ns_steps=5,step_size=0.00437,momentum=0.831,weight_decay=0.001]",
+    "class": "optim.legacy_frankwolfe.OrthogonalSGDM",
+    "params": {
+      "constraint": {
+        "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+        "params": {
+          "radius": "auto",
+          "radius_mult": 0.2966490956752529,
+          "ns_steps": 5
+        }
+      },
+      "step_size": 0.004369037114588639,
+      "momentum": 0.8306763207012575,
+      "weight_decay": 0.001
+    }
+  },
+  "exp_dir": "workflow/tuning_random/O-SGDM/exp_0009",
+  "mean_val_acc": 0.7799999713897705,
+  "std_val_acc": 0.0,
+  "mean_test_acc": 0.8199999928474426,
+  "std_test_acc": 0.0,
+  "mean_val_loss": 26.92672348022461,
+  "mean_test_loss": 16.194433212280273
+}

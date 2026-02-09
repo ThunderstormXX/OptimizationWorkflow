@@ -21,8 +21,12 @@ from distributed.strategies import GossipNode, GossipThenLocalStep, LocalStepThe
 from distributed.topology import CompleteTopology, RingTopology
 from environments.gossip import GossipEnvironment, consensus_error
 from models.numpy_vector import NumpyVectorModel
-from optim.constraints import L2BallConstraint
-from optim.frank_wolfe import FrankWolfeOptimizer, FWState, harmonic_step_size
+from optim.legacy_frankwolfe import (
+    FrankWolfeOptimizer,
+    FWState,
+    L2BallConstraint,
+    harmonic_step_size,
+)
 from tasks.synthetic_quadratic import (
     QuadraticGradComputer,
     SyntheticQuadraticTask,

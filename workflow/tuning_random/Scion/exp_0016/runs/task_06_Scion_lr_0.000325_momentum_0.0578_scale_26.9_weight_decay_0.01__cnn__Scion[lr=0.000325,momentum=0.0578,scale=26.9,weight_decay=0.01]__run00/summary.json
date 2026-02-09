@@ -1,0 +1,13 @@
+{
+  "device": "cpu",
+  "epochs": 10,
+  "final": {
+    "epoch": 9.0,
+    "test_accuracy": 0.18000000715255737,
+    "test_loss": 1399.3912353515625,
+    "train_accuracy": 0.21499999976158143,
+    "train_loss": 1292.432408203125,
+    "val_accuracy": 0.23999999463558197,
+    "val_loss": 1083.583251953125
+  }
+}

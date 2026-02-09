@@ -4,9 +4,13 @@ import numpy as np
 import pytest
 
 from models.numpy_vector import NumpyVectorModel
-from optim.adam import AdamOptimizer, AdamPGDOptimizer
-from optim.constraints import L1BallConstraint, L2BallConstraint, SimplexConstraint
-from optim.gradient_descent import ProjectedGradientDescentOptimizer
+from optim.adam import AdamOptimizer
+from optim.legacy_frankwolfe import (
+    L1BallConstraint,
+    L2BallConstraint,
+    ProjectedGradientDescentOptimizer,
+    SimplexConstraint,
+)
 from tasks.synthetic_quadratic import QuadraticGradComputer, QuadraticProblem, SyntheticQuadraticTask
 
 
@@ -44,48 +48,6 @@ def test_adam_optimizer_invalid_params() -> None:
         AdamOptimizer(beta1=1.5)
     with pytest.raises(ValueError):
         AdamOptimizer(beta2=-0.1)
-
-
-def test_adam_pgd_requires_project() -> None:
-    class NoProject:
-        def lmo(self, grad: np.ndarray) -> np.ndarray:
-            return grad
-
-    with pytest.raises(ValueError):
-        AdamPGDOptimizer(constraint=NoProject())
-
-    constraint = L2BallConstraint(radius=1.0)
-    with pytest.raises(ValueError):
-        AdamPGDOptimizer(constraint=constraint, lr=0.0)
-    with pytest.raises(ValueError):
-        AdamPGDOptimizer(constraint=constraint, beta1=1.2)
-    with pytest.raises(ValueError):
-        AdamPGDOptimizer(constraint=constraint, beta2=1.5)
-
-
-def test_adam_pgd_projects_on_init_and_step() -> None:
-    task = _build_quadratic_task()
-    model = NumpyVectorModel(np.array([10.0, -10.0, 5.0]))
-    grad_computer = QuadraticGradComputer()
-
-    constraint = L2BallConstraint(radius=1.0)
-    optimizer = AdamPGDOptimizer(constraint=constraint, lr=0.1)
-
-    state = optimizer.init_state(model)
-    assert np.linalg.norm(model.parameters_vector()) <= 1.0 + 1e-8
-    assert state.m.shape == model.parameters_vector().shape
-
-    new_state, _ = optimizer.step(
-        task=task,
-        model=model,
-        batch=None,
-        grad_computer=grad_computer,
-        state=state,
-        rng=np.random.default_rng(0),
-    )
-
-    assert new_state.t == 1
-    assert np.linalg.norm(model.parameters_vector()) <= 1.0 + 1e-8
 
 
 def test_constraints_behavior() -> None:

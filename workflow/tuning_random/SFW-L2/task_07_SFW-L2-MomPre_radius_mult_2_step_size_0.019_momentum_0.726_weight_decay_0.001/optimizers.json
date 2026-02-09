@@ -1,0 +1,18 @@
+[
+  {
+    "name": "SFW-L2-MomPre[radius_mult=2,step_size=0.019,momentum=0.726,weight_decay=0.001]",
+    "class": "optim.legacy_frankwolfe.StochasticFrankWolfeMomentumPre",
+    "params": {
+      "constraint": {
+        "class": "optim.legacy_frankwolfe.L2BallTensorConstraint",
+        "params": {
+          "radius": "auto",
+          "radius_mult": 2.0047497735916195
+        }
+      },
+      "step_size": 0.018975774162009164,
+      "momentum": 0.7259104001069632,
+      "weight_decay": 0.001
+    }
+  }
+]

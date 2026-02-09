@@ -117,6 +117,9 @@ class ExperimentBaseTraining:
                             apply_model_init(model_obj, init_spec, seed=self.seed + run_idx)
 
                         optimizer_obj = self._build_optimizer(opt_spec, model_obj)
+                        init_fn = getattr(optimizer_obj, "init", None)
+                        if callable(init_fn):
+                            init_fn()
 
                         history, summary = task_trainer.train(
                             model=model_obj,
@@ -180,13 +183,14 @@ class ExperimentBaseTraining:
                     step_dir.mkdir(parents=True, exist_ok=True)
                     for metric in step_metrics:
                         is_full_loss = metric == "loss"
+                        is_batch_loss = metric == "batch_loss"
                         plot_metric_by_optimizer(
                             opt_step_aggregates,
                             metric,
                             step_dir / f"{metric}.png",
                             title=f"{task_name} / {model_name} / step {metric}",
                             upper_only=is_full_loss,
-                            loglog=is_full_loss,
+                            loglog=is_full_loss or is_batch_loss,
                         )
 
         summary = {
@@ -200,7 +204,12 @@ class ExperimentBaseTraining:
     def _build_optimizer(self, spec: dict[str, Any], model: Any) -> Any:
         opt_class = import_class(spec["class"])
         skip_keys = set()
-        if opt_class.__name__ == "StochasticFrankWolfe":
+        if opt_class.__name__ in {
+            "StochasticFrankWolfe",
+            "StochasticFrankWolfeMomentumPre",
+            "StochasticFrankWolfeMomentumPost",
+            "OrthogonalSGDM",
+        }:
             skip_keys.add("constraint")
         params = resolve_values(spec.get("params", {}), skip_keys=skip_keys)
 
@@ -261,9 +270,15 @@ class ExperimentBaseTraining:
                 for t, row in enumerate(hist):
                     if key in row:
                         values[i, t] = row[key]
+            mask = np.isfinite(values)
+            count = mask.sum(axis=0)
+            total = np.nansum(values, axis=0)
+            mean = np.where(count > 0, total / count, np.nan)
+            diffs = np.where(mask, values - mean, 0.0)
+            var = np.where(count > 0, np.nansum(diffs**2, axis=0) / count, np.nan)
             metrics[key] = {
-                "mean": np.nanmean(values, axis=0).tolist(),
-                "std": np.nanstd(values, axis=0).tolist(),
+                "mean": mean.tolist(),
+                "std": np.sqrt(var).tolist(),
             }
 
         return {"metrics": metrics, "epochs": max_len}

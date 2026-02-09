@@ -103,6 +103,15 @@ def _loss_for(task: Any, logits: Any, labels: Any) -> Any:
     raise AttributeError("Task must provide loss_fn(logits, labels)")
 
 
+def _constraint_info_for(optimizer: Any) -> dict[str, float] | None:
+    info_fn = getattr(optimizer, "constraint_info", None)
+    if callable(info_fn):
+        info = info_fn()
+        if isinstance(info, dict) and info:
+            return {k: float(v) for k, v in info.items() if isinstance(v, (int, float))}
+    return None
+
+
 @dataclass
 class SupervisedTrainer:
     """Trainer for supervised learning on tasks with dataloaders."""
@@ -167,6 +176,7 @@ class SupervisedTrainer:
         )
 
         history: list[dict[str, float]] = []
+        last_constraint_info: dict[str, float] | None = None
 
         epoch_bar = None
         if progress_enabled:
@@ -197,6 +207,7 @@ class SupervisedTrainer:
                 global_step,
             )
             global_step = int(train_metrics.pop("_global_step", global_step))
+            last_constraint_info = train_metrics.pop("_constraint_info", None) or last_constraint_info
             row: dict[str, float] = {
                 "epoch": float(epoch),
                 "train_loss": train_metrics["loss"],
@@ -221,6 +232,9 @@ class SupervisedTrainer:
                 if "accuracy" in test_metrics:
                     row["test_accuracy"] = test_metrics["accuracy"]
 
+            if last_constraint_info:
+                row.update(last_constraint_info)
+
             history.append(row)
             self._append_history(run_dir / "history.jsonl", row)
 
@@ -235,6 +249,8 @@ class SupervisedTrainer:
             "device": device,
             "final": history[-1] if history else {},
         }
+        if last_constraint_info:
+            summary["constraint"] = last_constraint_info
 
         if test_loader is not None and self.test_every is None:
             test_metrics = self._run_eval(model, test_loader, task, device)
@@ -261,6 +277,7 @@ class SupervisedTrainer:
         total_loss = 0.0
         total_correct = 0.0
         total_seen = 0
+        last_constraint_info: dict[str, float] | None = None
 
         pbar = None
         batch_iter: Iterable[Any] = loader
@@ -299,6 +316,9 @@ class SupervisedTrainer:
                 torch.nn.utils.clip_grad_norm_(model.parameters(), self.grad_clip)
 
             optimizer.step()
+            info = _constraint_info_for(optimizer)
+            if info:
+                last_constraint_info = info
 
             batch_size = _batch_size(batch)
             total_loss += float(loss.item()) * batch_size
@@ -342,6 +362,9 @@ class SupervisedTrainer:
                     if every and global_step % int(every) == 0 and name in full_metrics:
                         step_row[name] = float(full_metrics[name])
 
+            if last_constraint_info and len(step_row) > 1:
+                step_row.update(last_constraint_info)
+
             if len(step_row) > 1:
                 self._append_history(run_dir / "steps.jsonl", step_row)
 
@@ -356,6 +379,8 @@ class SupervisedTrainer:
         if total_seen > 0:
             result["accuracy"] = total_correct / total_seen
         result["_global_step"] = float(global_step)
+        if last_constraint_info:
+            result["_constraint_info"] = last_constraint_info
         return result
 
     @staticmethod

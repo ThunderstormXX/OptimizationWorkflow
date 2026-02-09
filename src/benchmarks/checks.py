@@ -26,8 +26,7 @@ from distributed.topology import CompleteTopology, RingTopology
 from environments.gossip import GossipEnvironment
 from environments.single_process import SingleProcessEnvironment
 from models.numpy_vector import NumpyVectorModel
-from optim.frank_wolfe import FWState
-from optim.gradient_descent import GDState
+from optim.legacy_frankwolfe import FWState, GDState
 from tasks.synthetic_quadratic import (
     QuadraticGradComputer,
     SyntheticQuadraticTask,

@@ -1,0 +1,54 @@
+[
+  {
+    "name": "SGD(lr=0.05)",
+    "spec": {
+      "name": "SGD(lr=0.05)",
+      "class": "torch.optim.SGD",
+      "params": {
+        "lr": 0.05
+      }
+    },
+    "exp_dir": "workflow/tuning/SGD/exp_0001",
+    "mean_val_acc": 0.8766666650772095,
+    "std_val_acc": 0.01247217939483797,
+    "mean_test_acc": 0.9433333476384481,
+    "std_test_acc": 0.028674415616719486,
+    "mean_val_loss": 0.37328727046648663,
+    "mean_test_loss": 0.23704703152179718
+  },
+  {
+    "name": "SGD(lr=0.1)",
+    "spec": {
+      "name": "SGD(lr=0.1)",
+      "class": "torch.optim.SGD",
+      "params": {
+        "lr": 0.1
+      }
+    },
+    "exp_dir": "workflow/tuning/SGD/exp_0000",
+    "mean_val_acc": 0.8633333245913187,
+    "std_val_acc": 0.03771235379587081,
+    "mean_test_acc": 0.9233333269755045,
+    "std_test_acc": 0.0385861136723444,
+    "mean_val_loss": 0.4179397225379944,
+    "mean_test_loss": 0.29147373636563617
+  },
+  {
+    "name": "SGD(lr=0.1,mom=0.9)",
+    "spec": {
+      "name": "SGD(lr=0.1,mom=0.9)",
+      "class": "torch.optim.SGD",
+      "params": {
+        "lr": 0.1,
+        "momentum": 0.9
+      }
+    },
+    "exp_dir": "workflow/tuning/SGD/exp_0002",
+    "mean_val_acc": 0.10999999940395355,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.10999999940395355,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 2.3005552291870117,
+    "mean_test_loss": 2.3087554772694907
+  }
+]

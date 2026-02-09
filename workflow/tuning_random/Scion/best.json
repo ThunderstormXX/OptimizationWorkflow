@@ -1,0 +1,23 @@
+{
+  "name": "Scion[lr=0.00102,momentum=0.28,scale=2.98,weight_decay=0.01]",
+  "spec": {
+    "name": "Scion[lr=0.00102,momentum=0.28,scale=2.98,weight_decay=0.01]",
+    "class": "optim.scion.Scion",
+    "params": {
+      "lr": 0.001024381171013552,
+      "momentum": 0.28003915488498804,
+      "norm": "Auto",
+      "norm_kwargs": {},
+      "scale": 2.9798004099076327,
+      "unconstrained": false,
+      "weight_decay": 0.01
+    }
+  },
+  "exp_dir": "workflow/tuning_random/Scion/exp_0017",
+  "mean_val_acc": 0.6700000166893005,
+  "std_val_acc": 0.050000011920928955,
+  "mean_test_acc": 0.6599999964237213,
+  "std_test_acc": 0.030000001192092896,
+  "mean_val_loss": 1.863134741783142,
+  "mean_test_loss": 1.8577250242233276
+}

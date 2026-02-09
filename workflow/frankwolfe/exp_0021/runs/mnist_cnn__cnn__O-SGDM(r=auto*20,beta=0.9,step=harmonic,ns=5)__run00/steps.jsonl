@@ -1,0 +1,80 @@
+{"iter": 1.0, "batch_loss": 19624638464.0, "constraint_error": 2370.4826049804688, "constraint_norm": 256.19532775878906, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 2.0, "batch_loss": 68968296.0, "constraint_error": 2426.0948791503906, "constraint_norm": 309.2675437927246, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 3.0, "batch_loss": 773598720.0, "constraint_error": 2450.7748413085938, "constraint_norm": 376.2557907104492, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 4.0, "batch_loss": 3244737536.0, "constraint_error": 2419.2938842773438, "constraint_norm": 446.7684440612793, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 5.0, "batch_loss": 8198983680.0, "constraint_error": 2393.6128540039062, "constraint_norm": 518.3079452514648, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 6.0, "batch_loss": 16723609600.0, "constraint_error": 2369.1112060546875, "constraint_norm": 587.9480972290039, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 7.0, "batch_loss": 30379767808.0, "constraint_error": 2313.4959106445312, "constraint_norm": 654.1873245239258, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 8.0, "batch_loss": 48297209856.0, "constraint_error": 2268.9652709960938, "constraint_norm": 715.8239440917969, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 9.0, "batch_loss": 74169106432.0, "constraint_error": 2213.695266723633, "constraint_norm": 774.8552017211914, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 10.0, "batch_loss": 98339291136.0, "loss": 133320322383.872, "constraint_error": 2189.398895263672, "constraint_norm": 830.5090255737305, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 11.0, "batch_loss": 134981738496.0, "constraint_error": 2136.549102783203, "constraint_norm": 882.0356597900391, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 12.0, "batch_loss": 167506509824.0, "constraint_error": 2096.7022705078125, "constraint_norm": 930.3356628417969, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 13.0, "batch_loss": 212808171520.0, "constraint_error": 2040.9505310058594, "constraint_norm": 975.8185272216797, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 14.0, "batch_loss": 247041163264.0, "constraint_error": 2005.1821746826172, "constraint_norm": 1018.0757598876953, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 15.0, "batch_loss": 316653764608.0, "constraint_error": 1970.4798126220703, "constraint_norm": 1057.5603942871094, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 16.0, "batch_loss": 335679881216.0, "constraint_error": 1931.7074737548828, "constraint_norm": 1093.9148864746094, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 17.0, "batch_loss": 392638595072.0, "constraint_error": 1897.9473876953125, "constraint_norm": 1128.1539001464844, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 18.0, "batch_loss": 460863864832.0, "constraint_error": 1882.0789947509766, "constraint_norm": 1160.3189239501953, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 19.0, "batch_loss": 526575894528.0, "constraint_error": 1856.0513916015625, "constraint_norm": 1190.5441284179688, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 20.0, "batch_loss": 542523817984.0, "loss": 617286588170.24, "constraint_error": 1837.1761169433594, "constraint_norm": 1218.9144592285156, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 21.0, "batch_loss": 613812535296.0, "constraint_error": 1822.2222900390625, "constraint_norm": 1245.4462127685547, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 22.0, "batch_loss": 662438477824.0, "constraint_error": 1804.526382446289, "constraint_norm": 1269.9959869384766, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 23.0, "batch_loss": 739125362688.0, "constraint_error": 1797.1913757324219, "constraint_norm": 1293.0766296386719, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 24.0, "batch_loss": 777559408640.0, "constraint_error": 1791.1914367675781, "constraint_norm": 1314.2684173583984, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 25.0, "batch_loss": 867554295808.0, "constraint_error": 1784.3775329589844, "constraint_norm": 1334.411849975586, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 26.0, "batch_loss": 873695477760.0, "constraint_error": 1781.316650390625, "constraint_norm": 1353.5194091796875, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 27.0, "batch_loss": 895969001472.0, "constraint_error": 1780.2550201416016, "constraint_norm": 1371.488525390625, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 28.0, "batch_loss": 952684314624.0, "constraint_error": 1776.5636138916016, "constraint_norm": 1388.5404357910156, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 29.0, "batch_loss": 937855025152.0, "constraint_error": 1772.4006652832031, "constraint_norm": 1404.3875122070312, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 30.0, "batch_loss": 1048472911872.0, "loss": 1104003970629.632, "constraint_error": 1774.281005859375, "constraint_norm": 1419.4745635986328, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 31.0, "batch_loss": 1123267248128.0, "constraint_error": 1770.5452880859375, "constraint_norm": 1433.880111694336, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 32.0, "batch_loss": 1229100417024.0, "constraint_error": 1765.136489868164, "constraint_norm": 1447.7328491210938, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 33.0, "batch_loss": 1180605743104.0, "constraint_error": 1763.7715148925781, "constraint_norm": 1460.7359008789062, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 34.0, "batch_loss": 1278224367616.0, "constraint_error": 1767.4843444824219, "constraint_norm": 1473.0057830810547, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 35.0, "batch_loss": 1277836656640.0, "constraint_error": 1766.0447998046875, "constraint_norm": 1484.5135650634766, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 36.0, "batch_loss": 1229915684864.0, "constraint_error": 1753.3329010009766, "constraint_norm": 1495.33349609375, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 37.0, "batch_loss": 1359570796544.0, "constraint_error": 1754.2554779052734, "constraint_norm": 1505.6071319580078, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 38.0, "batch_loss": 1378268741632.0, "constraint_error": 1746.8983306884766, "constraint_norm": 1515.4294128417969, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 39.0, "batch_loss": 1364106149888.0, "constraint_error": 1737.6873016357422, "constraint_norm": 1524.7795715332031, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 40.0, "batch_loss": 1476376002560.0, "loss": 1469208032444.416, "constraint_error": 1736.7844848632812, "constraint_norm": 1533.27978515625, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 41.0, "batch_loss": 1531836891136.0, "constraint_error": 1725.216049194336, "constraint_norm": 1541.3516998291016, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 42.0, "batch_loss": 1431749918720.0, "constraint_error": 1715.3018493652344, "constraint_norm": 1548.9168701171875, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 43.0, "batch_loss": 1552951148544.0, "constraint_error": 1714.5420227050781, "constraint_norm": 1555.956802368164, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 44.0, "batch_loss": 1588011728896.0, "constraint_error": 1701.009780883789, "constraint_norm": 1562.7910461425781, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 45.0, "batch_loss": 1585513889792.0, "constraint_error": 1704.4160461425781, "constraint_norm": 1569.4352264404297, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 46.0, "batch_loss": 1581402030080.0, "constraint_error": 1699.8315887451172, "constraint_norm": 1575.634780883789, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 47.0, "batch_loss": 1553499160576.0, "constraint_error": 1684.9445190429688, "constraint_norm": 1581.6489562988281, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 48.0, "batch_loss": 1678329511936.0, "constraint_error": 1679.2723083496094, "constraint_norm": 1587.287582397461, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 49.0, "batch_loss": 1679921512448.0, "constraint_error": 1668.7502899169922, "constraint_norm": 1592.499771118164, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 50.0, "batch_loss": 1728248545280.0, "loss": 1711879127826.432, "constraint_error": 1664.288833618164, "constraint_norm": 1597.5600280761719, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 51.0, "batch_loss": 1589665071104.0, "constraint_error": 1655.5657043457031, "constraint_norm": 1602.4613189697266, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 52.0, "batch_loss": 1739242864640.0, "constraint_error": 1644.2509994506836, "constraint_norm": 1607.2326965332031, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 53.0, "batch_loss": 1696223985664.0, "constraint_error": 1642.599380493164, "constraint_norm": 1611.8758850097656, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 54.0, "batch_loss": 1826122629120.0, "constraint_error": 1633.3294982910156, "constraint_norm": 1616.4308166503906, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 55.0, "batch_loss": 1853599383552.0, "constraint_error": 1626.360237121582, "constraint_norm": 1620.9945068359375, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 56.0, "batch_loss": 1791626051584.0, "constraint_error": 1621.2673263549805, "constraint_norm": 1625.2113342285156, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 57.0, "batch_loss": 1834455793664.0, "constraint_error": 1628.144058227539, "constraint_norm": 1629.2794189453125, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 58.0, "batch_loss": 1912522932224.0, "constraint_error": 1612.8881454467773, "constraint_norm": 1633.2893981933594, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 59.0, "batch_loss": 1868069208064.0, "constraint_error": 1610.8083190917969, "constraint_norm": 1637.0289916992188, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 60.0, "batch_loss": 1796101373952.0, "loss": 1876075855478.784, "constraint_error": 1608.5846557617188, "constraint_norm": 1640.5847778320312, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 61.0, "batch_loss": 1884176777216.0, "constraint_error": 1592.624267578125, "constraint_norm": 1644.0335388183594, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 62.0, "batch_loss": 1789444751360.0, "constraint_error": 1599.2345733642578, "constraint_norm": 1647.3717651367188, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 63.0, "batch_loss": 1827302539264.0, "constraint_error": 1593.5885696411133, "constraint_norm": 1650.5897521972656, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 64.0, "batch_loss": 2046909218816.0, "constraint_error": 1594.1980667114258, "constraint_norm": 1653.62890625, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 65.0, "batch_loss": 1898325213184.0, "constraint_error": 1583.8299865722656, "constraint_norm": 1656.6422729492188, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 66.0, "batch_loss": 1930670374912.0, "constraint_error": 1584.852668762207, "constraint_norm": 1659.5552978515625, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 67.0, "batch_loss": 1994088382464.0, "constraint_error": 1585.7452545166016, "constraint_norm": 1662.3941040039062, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 68.0, "batch_loss": 1989976653824.0, "constraint_error": 1581.904685974121, "constraint_norm": 1665.1830749511719, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 69.0, "batch_loss": 1958536937472.0, "constraint_error": 1586.6789321899414, "constraint_norm": 1667.7859802246094, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 70.0, "batch_loss": 2051259891712.0, "loss": 1994364487204.864, "constraint_error": 1587.8632431030273, "constraint_norm": 1670.4127502441406, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 71.0, "batch_loss": 1902192361472.0, "constraint_error": 1585.9935302734375, "constraint_norm": 1672.8078002929688, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 72.0, "batch_loss": 2005109178368.0, "constraint_error": 1585.701889038086, "constraint_norm": 1674.9854125976562, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 73.0, "batch_loss": 2090795532288.0, "constraint_error": 1582.129737854004, "constraint_norm": 1677.1146545410156, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 74.0, "batch_loss": 2159124021248.0, "constraint_error": 1583.3671875, "constraint_norm": 1679.2232971191406, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 75.0, "batch_loss": 1955781148672.0, "constraint_error": 1578.1387481689453, "constraint_norm": 1681.2284851074219, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 76.0, "batch_loss": 1993223700480.0, "constraint_error": 1577.365364074707, "constraint_norm": 1683.2697143554688, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 77.0, "batch_loss": 2042342539264.0, "constraint_error": 1570.364517211914, "constraint_norm": 1685.2402038574219, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 78.0, "batch_loss": 2035255869440.0, "constraint_error": 1581.1403732299805, "constraint_norm": 1687.2076721191406, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 79.0, "batch_loss": 2061122928640.0, "constraint_error": 1575.6095809936523, "constraint_norm": 1689.120849609375, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}
+{"iter": 80.0, "batch_loss": 1972316143616.0, "loss": 2075997211983.872, "constraint_error": 1574.4836807250977, "constraint_norm": 1690.9464111328125, "constraint_radius": 429.89112854003906, "constraint_on_boundary": 0.0}

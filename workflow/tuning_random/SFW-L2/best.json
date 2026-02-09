@@ -1,0 +1,26 @@
+{
+  "name": "SFW-L2-MomPre[radius_mult=2.52,step_size=0.0019,momentum=0.815,weight_decay=0.0001]",
+  "spec": {
+    "name": "SFW-L2-MomPre[radius_mult=2.52,step_size=0.0019,momentum=0.815,weight_decay=0.0001]",
+    "class": "optim.legacy_frankwolfe.StochasticFrankWolfeMomentumPre",
+    "params": {
+      "constraint": {
+        "class": "optim.legacy_frankwolfe.L2BallTensorConstraint",
+        "params": {
+          "radius": "auto",
+          "radius_mult": 2.5179008476900964
+        }
+      },
+      "step_size": 0.0018986374015481247,
+      "momentum": 0.8148568903570974,
+      "weight_decay": 0.0001
+    }
+  },
+  "exp_dir": "workflow/tuning_random/SFW-L2/exp_0000",
+  "mean_val_acc": 0.9399999976158142,
+  "std_val_acc": 0.0,
+  "mean_test_acc": 0.9750000238418579,
+  "std_test_acc": 0.004999995231628418,
+  "mean_val_loss": 0.30272381007671356,
+  "mean_test_loss": 0.08171499893069267
+}

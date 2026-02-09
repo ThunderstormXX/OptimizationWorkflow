@@ -45,18 +45,34 @@ def plot_metric_by_optimizer(
             continue
         if loglog:
             x = np.arange(1, mean.size + 1)
-            mean = np.clip(mean, 1e-12, None)
+            mask = np.isfinite(mean) & (mean > 0)
         else:
             x = np.arange(mean.size)
-        plt.plot(x, mean, label=opt_name)
+            mask = np.isfinite(mean)
+
+        if not np.any(mask):
+            continue
+
+        x_plot = x[mask]
+        mean_plot = mean[mask]
+        if loglog:
+            mean_plot = np.clip(mean_plot, 1e-12, None)
+
+        plt.plot(x_plot, mean_plot, label=opt_name)
+
         if std.size == mean.size:
             upper = mean + std
+            upper = upper[mask]
             if loglog:
                 upper = np.clip(upper, 1e-12, None)
             if upper_only:
-                plt.plot(x, upper, linestyle="--", alpha=0.7)
+                plt.plot(x_plot, upper, linestyle="--", alpha=0.7)
             else:
-                plt.fill_between(x, mean - std, mean + std, alpha=0.2)
+                lower = mean - std
+                lower = lower[mask]
+                if loglog:
+                    lower = np.clip(lower, 1e-12, None)
+                plt.fill_between(x_plot, lower, upper, alpha=0.2)
         has_data = True
 
     if not has_data:

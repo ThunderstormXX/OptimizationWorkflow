@@ -64,10 +64,15 @@ from distributed.topology import CompleteTopology, RingTopology
 from environments.gossip import GossipEnvironment
 from environments.single_process import SingleProcessEnvironment
 from models.numpy_vector import NumpyVectorModel
-from optim.adam import AdamOptimizer, AdamPGDOptimizer
-from optim.constraints import L1BallConstraint, L2BallConstraint
-from optim.frank_wolfe import FrankWolfeOptimizer, FWState, constant_step_size, harmonic_step_size
-from optim.gradient_descent import (
+from optim.adam import AdamOptimizer
+from optim.legacy_frankwolfe import L1BallConstraint, L2BallConstraint
+from optim.legacy_frankwolfe import (
+    FrankWolfeOptimizer,
+    FWState,
+    constant_step_size,
+    harmonic_step_size,
+)
+from optim.legacy_frankwolfe import (
     GDState,
     GradientDescentOptimizer,
     ProjectedGradientDescentOptimizer,
@@ -1679,10 +1684,7 @@ def _build_mnist_optimizer(
     state: Any
 
     if optimizer_name == "adam":
-        if constraint is not None:
-            optimizer = AdamPGDOptimizer(constraint=constraint, lr=lr)
-        else:
-            optimizer = AdamOptimizer(lr=lr)
+        optimizer = AdamOptimizer(lr=lr)
         state = optimizer.init_state(model)
     elif optimizer_name == "gd":
         optimizer = GradientDescentOptimizer(lr=lr)

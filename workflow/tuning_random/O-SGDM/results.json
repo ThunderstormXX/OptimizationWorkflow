@@ -1,0 +1,164 @@
+[
+  {
+    "name": "O-SGDM[radius_mult=0.297,ns_steps=5,step_size=0.00437,momentum=0.831,weight_decay=0.001]",
+    "spec": {
+      "name": "O-SGDM[radius_mult=0.297,ns_steps=5,step_size=0.00437,momentum=0.831,weight_decay=0.001]",
+      "class": "optim.legacy_frankwolfe.OrthogonalSGDM",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 0.2966490956752529,
+            "ns_steps": 5
+          }
+        },
+        "step_size": 0.004369037114588639,
+        "momentum": 0.8306763207012575,
+        "weight_decay": 0.001
+      }
+    },
+    "exp_dir": "workflow/tuning_random/O-SGDM/exp_0009",
+    "mean_val_acc": 0.7799999713897705,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.8199999928474426,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 26.92672348022461,
+    "mean_test_loss": 16.194433212280273
+  },
+  {
+    "name": "O-SGDM[radius_mult=1.2,ns_steps=3,step_size=0.00272,momentum=0.651,weight_decay=0]",
+    "spec": {
+      "name": "O-SGDM[radius_mult=1.2,ns_steps=3,step_size=0.00272,momentum=0.651,weight_decay=0]",
+      "class": "optim.legacy_frankwolfe.OrthogonalSGDM",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 1.2040956242528977,
+            "ns_steps": 3
+          }
+        },
+        "step_size": 0.002719007121164338,
+        "momentum": 0.6510119080216165,
+        "weight_decay": 0.0
+      }
+    },
+    "exp_dir": "workflow/tuning_random/O-SGDM/exp_0012",
+    "mean_val_acc": 0.7400000095367432,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.8399999737739563,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 7721.20751953125,
+    "mean_test_loss": 5515.0263671875
+  },
+  {
+    "name": "O-SGDM[radius_mult=0.533,ns_steps=5,step_size=0.00233,momentum=0.7,weight_decay=0]",
+    "spec": {
+      "name": "O-SGDM[radius_mult=0.533,ns_steps=5,step_size=0.00233,momentum=0.7,weight_decay=0]",
+      "class": "optim.legacy_frankwolfe.OrthogonalSGDM",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 0.5332616775454954,
+            "ns_steps": 5
+          }
+        },
+        "step_size": 0.00232969813024263,
+        "momentum": 0.7003455863507794,
+        "weight_decay": 0.0
+      }
+    },
+    "exp_dir": "workflow/tuning_random/O-SGDM/exp_0013",
+    "mean_val_acc": 0.7099999785423279,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.7799999713897705,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 328.9674072265625,
+    "mean_test_loss": 278.14300537109375
+  },
+  {
+    "name": "O-SGDM[radius_mult=1.71,ns_steps=3,step_size=0.000667,momentum=0.618,weight_decay=0]",
+    "spec": {
+      "name": "O-SGDM[radius_mult=1.71,ns_steps=3,step_size=0.000667,momentum=0.618,weight_decay=0]",
+      "class": "optim.legacy_frankwolfe.OrthogonalSGDM",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 1.714234903964027,
+            "ns_steps": 3
+          }
+        },
+        "step_size": 0.0006668977987301033,
+        "momentum": 0.617729667325096,
+        "weight_decay": 0.0
+      }
+    },
+    "exp_dir": "workflow/tuning_random/O-SGDM/exp_0008",
+    "mean_val_acc": 0.5299999713897705,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.5600000023841858,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 70940.203125,
+    "mean_test_loss": 95897.921875
+  },
+  {
+    "name": "O-SGDM[radius_mult=1.61,ns_steps=5,step_size=0.000677,momentum=0.589,weight_decay=0.01]",
+    "spec": {
+      "name": "O-SGDM[radius_mult=1.61,ns_steps=5,step_size=0.000677,momentum=0.589,weight_decay=0.01]",
+      "class": "optim.legacy_frankwolfe.OrthogonalSGDM",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 1.6098474535420382,
+            "ns_steps": 5
+          }
+        },
+        "step_size": 0.0006769033400025195,
+        "momentum": 0.5891481140883355,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning_random/O-SGDM/exp_0010",
+    "mean_val_acc": 0.5299999713897705,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.5299999713897705,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 56034.69140625,
+    "mean_test_loss": 80976.25
+  },
+  {
+    "name": "O-SGDM[radius_mult=2.35,ns_steps=3,step_size=0.000213,momentum=0.749,weight_decay=0.001]",
+    "spec": {
+      "name": "O-SGDM[radius_mult=2.35,ns_steps=3,step_size=0.000213,momentum=0.749,weight_decay=0.001]",
+      "class": "optim.legacy_frankwolfe.OrthogonalSGDM",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 2.354759648445818,
+            "ns_steps": 3
+          }
+        },
+        "step_size": 0.00021275291304047352,
+        "momentum": 0.749126824474228,
+        "weight_decay": 0.001
+      }
+    },
+    "exp_dir": "workflow/tuning_random/O-SGDM/exp_0011",
+    "mean_val_acc": 0.15000000596046448,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.25999999046325684,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 1559418.875,
+    "mean_test_loss": 1652314.25
+  }
+]

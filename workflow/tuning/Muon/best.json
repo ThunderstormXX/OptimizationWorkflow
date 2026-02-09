@@ -1,0 +1,19 @@
+{
+  "name": "Muon(lr=5e-3,momentum=0.9,wd=1e-2)",
+  "spec": {
+    "name": "Muon(lr=5e-3,momentum=0.9,wd=1e-2)",
+    "class": "optim.muon.SingleDeviceMuon",
+    "params": {
+      "lr": 0.005,
+      "momentum": 0.9,
+      "weight_decay": 0.01
+    }
+  },
+  "exp_dir": "workflow/tuning/Muon/exp_0001",
+  "mean_val_acc": 0.9266666769981384,
+  "std_val_acc": 0.004714040712246475,
+  "mean_test_acc": 0.9766666889190674,
+  "std_test_acc": 0.00942808142449295,
+  "mean_val_loss": 0.30786915123462677,
+  "mean_test_loss": 0.10748295734326045
+}

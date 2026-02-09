@@ -1,0 +1,23 @@
+{
+  "constraint": {
+    "constraint_error": 134.97375869750977,
+    "constraint_norm": 157.07979583740234,
+    "constraint_on_boundary": 0.0,
+    "constraint_radius": 42.989112854003906
+  },
+  "device": "cpu",
+  "epochs": 10,
+  "final": {
+    "constraint_error": 134.97375869750977,
+    "constraint_norm": 157.07979583740234,
+    "constraint_on_boundary": 0.0,
+    "constraint_radius": 42.989112854003906,
+    "epoch": 9.0,
+    "test_accuracy": 0.11999999731779099,
+    "test_loss": 105.75589752197266,
+    "train_accuracy": 0.5840000001192093,
+    "train_loss": 2070.0787541503905,
+    "val_accuracy": 0.09000000357627869,
+    "val_loss": 31.84649658203125
+  }
+}

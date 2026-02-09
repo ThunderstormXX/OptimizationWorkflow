@@ -1,0 +1,35 @@
+{
+  "experiment": {
+    "class": "experiments.base_training.ExperimentBaseTraining",
+    "params": {
+      "exp_id": 8,
+      "num_runs": 2,
+      "seed": 0,
+      "task_dirs": [
+        "workflow/tuning_random/SFW-L2/task_08_SFW-L2-MomPre_radius_mult_1.03_step_size_0.00614_momentum_0.904_weight_decay_0.001"
+      ],
+      "task_overrides": {
+        "batch_size": 128,
+        "data_root": ".data",
+        "device": "cpu",
+        "test_size": 100,
+        "train_size": 1000,
+        "val_size": 100,
+        "verbose": true
+      },
+      "trainer": {
+        "class": "trainers.supervised.SupervisedTrainer",
+        "params": {
+          "batch_log_every": 1,
+          "device": "cpu",
+          "epochs": 10,
+          "full_loss_every": 10,
+          "progress": true,
+          "test_every": 1,
+          "val_every": 1
+        }
+      },
+      "workflow_dir": "workflow/tuning_random/SFW-L2"
+    }
+  }
+}

@@ -1,0 +1,83 @@
+[
+  {
+    "name": "SFW-Ortho-MomPre(beta=0.9,r=auto*1,step=0.05,ns=5,wd=1e-2)",
+    "spec": {
+      "name": "SFW-Ortho-MomPre(beta=0.9,r=auto*1,step=0.05,ns=5,wd=1e-2)",
+      "class": "optim.legacy_frankwolfe.StochasticFrankWolfeMomentumPre",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 1.0,
+            "ns_steps": 5
+          }
+        },
+        "step_size": 0.05,
+        "momentum": 0.9,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning/SFW-Ortho/exp_0000",
+    "mean_val_acc": 0.4349999949336052,
+    "std_val_acc": 0.32499999552965164,
+    "mean_test_acc": 0.45500000193715096,
+    "std_test_acc": 0.35500000044703484,
+    "mean_val_loss": 192.331467628479,
+    "mean_test_loss": 185.59163761138916
+  },
+  {
+    "name": "SFW-Ortho-MomPre(beta=0.9,r=auto*5,step=0.1,ns=5,wd=1e-2)",
+    "spec": {
+      "name": "SFW-Ortho-MomPre(beta=0.9,r=auto*5,step=0.1,ns=5,wd=1e-2)",
+      "class": "optim.legacy_frankwolfe.StochasticFrankWolfeMomentumPre",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 5.0,
+            "ns_steps": 5
+          }
+        },
+        "step_size": 0.1,
+        "momentum": 0.9,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning/SFW-Ortho/exp_0002",
+    "mean_val_acc": 0.10500000044703484,
+    "std_val_acc": 0.03500000014901161,
+    "mean_test_acc": 0.08999999798834324,
+    "std_test_acc": 0.029999999329447746,
+    "mean_val_loss": 26549.70751953125,
+    "mean_test_loss": 7035.6370849609375
+  },
+  {
+    "name": "SFW-Ortho-MomPre(beta=0.9,r=auto*2,step=0.05,ns=5,wd=1e-2)",
+    "spec": {
+      "name": "SFW-Ortho-MomPre(beta=0.9,r=auto*2,step=0.05,ns=5,wd=1e-2)",
+      "class": "optim.legacy_frankwolfe.StochasticFrankWolfeMomentumPre",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 2.0,
+            "ns_steps": 5
+          }
+        },
+        "step_size": 0.05,
+        "momentum": 0.9,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning/SFW-Ortho/exp_0001",
+    "mean_val_acc": 0.10000000149011612,
+    "std_val_acc": 0.009999997913837433,
+    "mean_test_acc": 0.12999999895691872,
+    "std_test_acc": 0.010000001639127731,
+    "mean_val_loss": 155.23731994628906,
+    "mean_test_loss": 54.63857853412628
+  }
+]

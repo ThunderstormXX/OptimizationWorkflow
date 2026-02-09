@@ -1,55 +1,64 @@
-"""Optimization algorithms module.
-
-This package contains optimizer implementations including:
-- Frank-Wolfe (Conditional Gradient) optimizer
-- Gradient Descent (GD) optimizer
-- Projected Gradient Descent (PGD) optimizer
-- Adam optimizer (with optional projection)
-- Constraint sets (L1 ball, L2 ball, simplex)
-- Step size schedules
-"""
+"""Optimizers and constraints."""
 
 from __future__ import annotations
 
-from optim.adam import AdamOptimizer, AdamPGDOptimizer, AdamState
-from optim.constraints import L1BallConstraint, L2BallConstraint, SimplexConstraint
-from optim.frank_wolfe import (
-    FrankWolfeOptimizer,
+from optim.adam import AdamOptimizer, AdamState
+from optim.legacy_frankwolfe import (
     FWState,
+    GDState,
+    GradientDescentOptimizer,
+    FrankWolfeOptimizer,
+    L1BallConstraint,
+    L2BallConstraint,
+    L2BallTensorConstraint,
+    OrthogonalMatrixConstraint,
+    ProjectedGradientDescentOptimizer,
+    SimplexConstraint,
     StepSize,
+    StochasticFrankWolfe,
+    StochasticFrankWolfeMomentumPost,
+    StochasticFrankWolfeMomentumPre,
+    OrthogonalSGDM,
     constant_step_size,
     harmonic_step_size,
 )
-from optim.gradient_descent import (
-    GDState,
-    GradientDescentOptimizer,
-    ProjectedGradientDescentOptimizer,
+from optim.muon import (
+    Muon,
+    MuonWithAuxAdam,
+    SingleDeviceMuon,
+    SingleDeviceMuonWithAuxAdam,
 )
-from optim.muon import Muon
-from optim.stochastic_frank_wolfe import StochasticFrankWolfe
-from optim.torch_gd import TorchGD
+from optim.scion import Scion, ScionLight
 
 __all__ = [
-    # Constraints
+    # Legacy constraints + step sizes
     "L1BallConstraint",
     "L2BallConstraint",
+    "L2BallTensorConstraint",
+    "OrthogonalMatrixConstraint",
     "SimplexConstraint",
-    # Frank-Wolfe
-    "FrankWolfeOptimizer",
-    "FWState",
     "StepSize",
     "constant_step_size",
     "harmonic_step_size",
-    # Gradient Descent
+    # Legacy optimizers
+    "FrankWolfeOptimizer",
+    "FWState",
     "GradientDescentOptimizer",
     "ProjectedGradientDescentOptimizer",
     "GDState",
-    # Adam
     "AdamOptimizer",
-    "AdamPGDOptimizer",
     "AdamState",
-    # Torch optimizers
+    # Torch stochastic Frank-Wolfe
     "StochasticFrankWolfe",
+    "StochasticFrankWolfeMomentumPost",
+    "StochasticFrankWolfeMomentumPre",
+    "OrthogonalSGDM",
+    # Muon
     "Muon",
-    "TorchGD",
+    "SingleDeviceMuon",
+    "MuonWithAuxAdam",
+    "SingleDeviceMuonWithAuxAdam",
+    # Scion
+    "Scion",
+    "ScionLight",
 ]

@@ -5,7 +5,7 @@ import pytest
 import pytest
 
 from benchmarks import registry
-from optim.frank_wolfe import FrankWolfeOptimizer
+from optim.legacy_frankwolfe import FrankWolfeOptimizer
 
 
 def test_register_optimizer_duplicate() -> None:

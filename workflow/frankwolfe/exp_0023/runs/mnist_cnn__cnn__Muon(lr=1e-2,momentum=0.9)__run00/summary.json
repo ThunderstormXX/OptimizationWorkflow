@@ -1,0 +1,13 @@
+{
+  "device": "mps",
+  "epochs": 10,
+  "final": {
+    "epoch": 9.0,
+    "test_accuracy": 0.9800000190734863,
+    "test_loss": 0.0932224690914154,
+    "train_accuracy": 1.0,
+    "train_loss": 0.00011011802777647972,
+    "val_accuracy": 0.9200000166893005,
+    "val_loss": 0.441007524728775
+  }
+}

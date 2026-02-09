@@ -1,0 +1,10 @@
+{"epoch": 0.0, "train_loss": 1.2077495507240295, "train_accuracy": 0.7027, "val_loss": 0.6310947341918945, "val_accuracy": 0.7820000014305115, "test_loss": 0.5900852370262146, "test_accuracy": 0.8009999990463257}
+{"epoch": 1.0, "train_loss": 0.18878328471779823, "train_accuracy": 0.9417, "val_loss": 0.11951067015528678, "val_accuracy": 0.9629999985694885, "test_loss": 0.16059105002880097, "test_accuracy": 0.9499999995231628}
+{"epoch": 2.0, "train_loss": 0.11635191957950591, "train_accuracy": 0.9629, "val_loss": 0.42043101525306703, "val_accuracy": 0.8880000014305115, "test_loss": 0.43168919801712036, "test_accuracy": 0.8789999976158142}
+{"epoch": 3.0, "train_loss": 0.10097195272445679, "train_accuracy": 0.9706, "val_loss": 0.5263595490455627, "val_accuracy": 0.8690000023841858, "test_loss": 0.5093431169986725, "test_accuracy": 0.8730000014305115}
+{"epoch": 4.0, "train_loss": 0.08055601156949997, "train_accuracy": 0.9755, "val_loss": 0.7383279447555542, "val_accuracy": 0.8600000023841858, "test_loss": 0.6315501103401184, "test_accuracy": 0.876000002861023}
+{"epoch": 5.0, "train_loss": 0.0575460834145546, "train_accuracy": 0.9821, "val_loss": 0.9573713994026184, "val_accuracy": 0.8500000009536743, "test_loss": 1.19083154296875, "test_accuracy": 0.8449999985694885}
+{"epoch": 6.0, "train_loss": 0.06058162311315537, "train_accuracy": 0.9831, "val_loss": 0.0897777152955532, "val_accuracy": 0.9729999985694885, "test_loss": 0.11344175910949707, "test_accuracy": 0.968999997138977}
+{"epoch": 7.0, "train_loss": 0.03565266314744949, "train_accuracy": 0.9884, "val_loss": 0.2976952085494995, "val_accuracy": 0.9120000028610229, "test_loss": 0.37967597126960756, "test_accuracy": 0.9070000004768372}
+{"epoch": 8.0, "train_loss": 0.0430015230842866, "train_accuracy": 0.9878, "val_loss": 0.08794852623343467, "val_accuracy": 0.9739999985694885, "test_loss": 0.10148807954788208, "test_accuracy": 0.9730000019073486}
+{"epoch": 9.0, "train_loss": 0.02335485183726996, "train_accuracy": 0.9936, "val_loss": 0.0851914067864418, "val_accuracy": 0.9750000009536743, "test_loss": 0.10950743472576141, "test_accuracy": 0.9679999995231628}

@@ -1,0 +1,18 @@
+{
+  "name": "AdamW(lr=1e-3,wd=1e-2)",
+  "spec": {
+    "name": "AdamW(lr=1e-3,wd=1e-2)",
+    "class": "torch.optim.AdamW",
+    "params": {
+      "lr": 0.001,
+      "weight_decay": 0.01
+    }
+  },
+  "exp_dir": "workflow/tuning/AdamW/exp_0000",
+  "mean_val_acc": 0.9100000063578287,
+  "std_val_acc": 0.008164982356065494,
+  "mean_test_acc": 0.9700000087420145,
+  "std_test_acc": 0.016329940378618523,
+  "mean_val_loss": 0.24444080889225006,
+  "mean_test_loss": 0.10826826592286427
+}

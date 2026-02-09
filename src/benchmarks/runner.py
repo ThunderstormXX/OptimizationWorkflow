@@ -77,7 +77,10 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     # Write minimal metadata for the experiment directory
     workflow_dir = Path(summary.get("workflow_dir", "workflow"))
-    exp_dir = Path(summary.get("exp_dir", next_experiment_dir(workflow_dir)))
+    if "exp_dir" in summary:
+        exp_dir = Path(summary["exp_dir"])
+    else:
+        exp_dir = next_experiment_dir(workflow_dir)
 
     meta = {"config": Path(args.config).as_posix()}
     write_run_files(exp_dir, meta=meta, config=config, readme_text=summary.get("readme", ""))

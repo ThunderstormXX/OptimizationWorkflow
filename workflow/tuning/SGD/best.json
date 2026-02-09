@@ -1,0 +1,17 @@
+{
+  "name": "SGD(lr=0.05)",
+  "spec": {
+    "name": "SGD(lr=0.05)",
+    "class": "torch.optim.SGD",
+    "params": {
+      "lr": 0.05
+    }
+  },
+  "exp_dir": "workflow/tuning/SGD/exp_0001",
+  "mean_val_acc": 0.8766666650772095,
+  "std_val_acc": 0.01247217939483797,
+  "mean_test_acc": 0.9433333476384481,
+  "std_test_acc": 0.028674415616719486,
+  "mean_val_loss": 0.37328727046648663,
+  "mean_test_loss": 0.23704703152179718
+}

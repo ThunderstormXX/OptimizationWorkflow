@@ -1,0 +1,116 @@
+[
+  {
+    "name": "Muon[lr=0.0036,momentum=0.914,weight_decay=0.01]",
+    "spec": {
+      "name": "Muon[lr=0.0036,momentum=0.914,weight_decay=0.01]",
+      "class": "optim.muon.SingleDeviceMuon",
+      "params": {
+        "lr": 0.0035983136922924596,
+        "momentum": 0.9144065613219523,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Muon/exp_0001",
+    "mean_val_acc": 0.925000011920929,
+    "std_val_acc": 0.004999995231628418,
+    "mean_test_acc": 0.9650000035762787,
+    "std_test_acc": 0.005000025033950806,
+    "mean_val_loss": 0.3379456698894501,
+    "mean_test_loss": 0.13244396075606346
+  },
+  {
+    "name": "Muon[lr=0.00593,momentum=0.899,weight_decay=0.0001]",
+    "spec": {
+      "name": "Muon[lr=0.00593,momentum=0.899,weight_decay=0.0001]",
+      "class": "optim.muon.SingleDeviceMuon",
+      "params": {
+        "lr": 0.0059330121708449654,
+        "momentum": 0.8993499790320846,
+        "weight_decay": 0.0001
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Muon/exp_0002",
+    "mean_val_acc": 0.925000011920929,
+    "std_val_acc": 0.004999995231628418,
+    "mean_test_acc": 0.9700000286102295,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 0.3720089942216873,
+    "mean_test_loss": 0.12112465500831604
+  },
+  {
+    "name": "Muon[lr=0.00542,momentum=0.949,weight_decay=0]",
+    "spec": {
+      "name": "Muon[lr=0.00542,momentum=0.949,weight_decay=0]",
+      "class": "optim.muon.SingleDeviceMuon",
+      "params": {
+        "lr": 0.005417476842558317,
+        "momentum": 0.9490964107195324,
+        "weight_decay": 0.0
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Muon/exp_0004",
+    "mean_val_acc": 0.9200000166893005,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.9550000131130219,
+    "std_test_acc": 0.015000015497207642,
+    "mean_val_loss": 0.36427541077136993,
+    "mean_test_loss": 0.1409718319773674
+  },
+  {
+    "name": "Muon[lr=0.00993,momentum=0.885,weight_decay=0.0001]",
+    "spec": {
+      "name": "Muon[lr=0.00993,momentum=0.885,weight_decay=0.0001]",
+      "class": "optim.muon.SingleDeviceMuon",
+      "params": {
+        "lr": 0.009928025007610822,
+        "momentum": 0.8846229728594437,
+        "weight_decay": 0.0001
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Muon/exp_0005",
+    "mean_val_acc": 0.9150000214576721,
+    "std_val_acc": 0.004999995231628418,
+    "mean_test_acc": 0.9750000238418579,
+    "std_test_acc": 0.004999995231628418,
+    "mean_val_loss": 0.6824596226215363,
+    "mean_test_loss": 0.24175993353128433
+  },
+  {
+    "name": "Muon[lr=0.00248,momentum=0.854,weight_decay=0.01]",
+    "spec": {
+      "name": "Muon[lr=0.00248,momentum=0.854,weight_decay=0.01]",
+      "class": "optim.muon.SingleDeviceMuon",
+      "params": {
+        "lr": 0.0024825018593030534,
+        "momentum": 0.8536851719478608,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Muon/exp_0003",
+    "mean_val_acc": 0.8999999761581421,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.9449999928474426,
+    "std_test_acc": 0.004999995231628418,
+    "mean_val_loss": 0.39233341813087463,
+    "mean_test_loss": 0.23038484901189804
+  },
+  {
+    "name": "Muon[lr=0.00273,momentum=0.96,weight_decay=0]",
+    "spec": {
+      "name": "Muon[lr=0.00273,momentum=0.96,weight_decay=0]",
+      "class": "optim.muon.SingleDeviceMuon",
+      "params": {
+        "lr": 0.0027251740185226976,
+        "momentum": 0.9601663858018402,
+        "weight_decay": 0.0
+      }
+    },
+    "exp_dir": "workflow/tuning_random/Muon/exp_0000",
+    "mean_val_acc": 0.8950000107288361,
+    "std_val_acc": 0.015000015497207642,
+    "mean_test_acc": 0.9350000023841858,
+    "std_test_acc": 0.014999985694885254,
+    "mean_val_loss": 0.4098323881626129,
+    "mean_test_loss": 0.26676294952630997
+  }
+]

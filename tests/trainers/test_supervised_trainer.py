@@ -26,7 +26,6 @@ class TinyTask:
 
 def test_supervised_trainer_runs(tmp_path: Path) -> None:
     from trainers.supervised import SupervisedTrainer
-    from optim.torch_gd import TorchGD
 
     x = torch.randn(16, 4)
     y = torch.randint(0, 3, (16,))
@@ -35,7 +34,7 @@ def test_supervised_trainer_runs(tmp_path: Path) -> None:
 
     task = TinyTask(train_loader=loader, val_loader=loader, test_loader=loader)
     model = torch.nn.Linear(4, 3)
-    optimizer = TorchGD(model.parameters(), lr=0.1)
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 
     trainer = SupervisedTrainer(epochs=2, progress=False, test_every=None)
     history, summary = trainer.train(
@@ -64,7 +63,6 @@ class TinyTaskNoMetrics:
 
 def test_supervised_trainer_progress_and_default_metrics(tmp_path: Path) -> None:
     from trainers.supervised import SupervisedTrainer
-    from optim.torch_gd import TorchGD
 
     x = torch.randn(8, 2)
     y = torch.randint(0, 2, (8,))
@@ -73,7 +71,7 @@ def test_supervised_trainer_progress_and_default_metrics(tmp_path: Path) -> None
 
     task = TinyTaskNoMetrics(loader)
     model = torch.nn.Linear(2, 2)
-    optimizer = TorchGD(model.parameters(), lr=0.1)
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 
     trainer = SupervisedTrainer(epochs=1, progress=True, test_every=1)
     history, summary = trainer.train(
@@ -91,10 +89,9 @@ def test_supervised_trainer_progress_and_default_metrics(tmp_path: Path) -> None
 
 def test_supervised_trainer_requires_train_loader(tmp_path: Path) -> None:
     from trainers.supervised import SupervisedTrainer
-    from optim.torch_gd import TorchGD
 
     model = torch.nn.Linear(2, 2)
-    optimizer = TorchGD(model.parameters(), lr=0.1)
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 
     class BadTask:
         pass
@@ -126,7 +123,6 @@ def test_supervised_helpers_cover_branches() -> None:
 
 def test_supervised_trainer_grad_clip(tmp_path: Path) -> None:
     from trainers.supervised import SupervisedTrainer
-    from optim.torch_gd import TorchGD
 
     x = torch.randn(8, 2)
     y = torch.randint(0, 2, (8,))
@@ -135,7 +131,7 @@ def test_supervised_trainer_grad_clip(tmp_path: Path) -> None:
 
     task = TinyTask(train_loader=loader, val_loader=loader, test_loader=loader)
     model = torch.nn.Linear(2, 2)
-    optimizer = TorchGD(model.parameters(), lr=0.1)
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 
     trainer = SupervisedTrainer(epochs=1, progress=False, grad_clip=0.5)
     history, _ = trainer.train(

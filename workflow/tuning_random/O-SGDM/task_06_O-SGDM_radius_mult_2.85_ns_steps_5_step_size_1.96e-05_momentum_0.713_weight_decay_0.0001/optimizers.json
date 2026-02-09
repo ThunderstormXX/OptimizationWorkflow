@@ -1,0 +1,19 @@
+[
+  {
+    "name": "O-SGDM[radius_mult=2.85,ns_steps=5,step_size=1.96e-05,momentum=0.713,weight_decay=0.0001]",
+    "class": "optim.legacy_frankwolfe.OrthogonalSGDM",
+    "params": {
+      "constraint": {
+        "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+        "params": {
+          "radius": "auto",
+          "radius_mult": 2.847992575969386,
+          "ns_steps": 5
+        }
+      },
+      "step_size": 1.9617912117539415e-05,
+      "momentum": 0.7132480983487162,
+      "weight_decay": 0.0001
+    }
+  }
+]

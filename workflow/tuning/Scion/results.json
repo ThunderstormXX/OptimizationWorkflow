@@ -1,0 +1,90 @@
+[
+  {
+    "name": "Scion(lr=5e-4,m=0.1,norm=Auto,scale=0.5)",
+    "spec": {
+      "name": "Scion(lr=5e-4,m=0.1,norm=Auto,scale=0.5)",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.0005,
+        "momentum": 0.1,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 0.5,
+        "unconstrained": false
+      }
+    },
+    "exp_dir": "workflow/tuning/Scion/exp_0000",
+    "mean_val_acc": 0.10999999940395355,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.10999999940395355,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 2.301021695137024,
+    "mean_test_loss": 2.302318811416626
+  },
+  {
+    "name": "Scion(lr=1e-3,m=0.1,norm=Auto,scale=0.5)",
+    "spec": {
+      "name": "Scion(lr=1e-3,m=0.1,norm=Auto,scale=0.5)",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.001,
+        "momentum": 0.1,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 0.5,
+        "unconstrained": false
+      }
+    },
+    "exp_dir": "workflow/tuning/Scion/exp_0001",
+    "mean_val_acc": 0.10999999940395355,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.10999999940395355,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 2.300079822540283,
+    "mean_test_loss": 2.3027427196502686
+  },
+  {
+    "name": "Scion(lr=1e-3,m=0.1,norm=Auto,scale=1)",
+    "spec": {
+      "name": "Scion(lr=1e-3,m=0.1,norm=Auto,scale=1)",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.001,
+        "momentum": 0.1,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 1.0,
+        "unconstrained": false
+      }
+    },
+    "exp_dir": "workflow/tuning/Scion/exp_0002",
+    "mean_val_acc": 0.10999999940395355,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.10999999940395355,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 2.2937047481536865,
+    "mean_test_loss": 2.2995094060897827
+  },
+  {
+    "name": "Scion(lr=2e-3,m=0.1,norm=Auto,scale=0.5)",
+    "spec": {
+      "name": "Scion(lr=2e-3,m=0.1,norm=Auto,scale=0.5)",
+      "class": "optim.scion.Scion",
+      "params": {
+        "lr": 0.002,
+        "momentum": 0.1,
+        "norm": "Auto",
+        "norm_kwargs": {},
+        "scale": 0.5,
+        "unconstrained": false
+      }
+    },
+    "exp_dir": "workflow/tuning/Scion/exp_0003",
+    "mean_val_acc": 0.10999999940395355,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.10999999940395355,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 2.2996819019317627,
+    "mean_test_loss": 2.304949402809143
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "AdamW(lr=1e-3,wd=1e-2)",
+    "spec": {
+      "name": "AdamW(lr=1e-3,wd=1e-2)",
+      "class": "torch.optim.AdamW",
+      "params": {
+        "lr": 0.001,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning/AdamW/exp_0000",
+    "mean_val_acc": 0.9100000063578287,
+    "std_val_acc": 0.008164982356065494,
+    "mean_test_acc": 0.9700000087420145,
+    "std_test_acc": 0.016329940378618523,
+    "mean_val_loss": 0.24444080889225006,
+    "mean_test_loss": 0.10826826592286427
+  },
+  {
+    "name": "AdamW(lr=1e-3,wd=0)",
+    "spec": {
+      "name": "AdamW(lr=1e-3,wd=0)",
+      "class": "torch.optim.AdamW",
+      "params": {
+        "lr": 0.001,
+        "weight_decay": 0.0
+      }
+    },
+    "exp_dir": "workflow/tuning/AdamW/exp_0002",
+    "mean_val_acc": 0.9066666563351949,
+    "std_val_acc": 0.009428109522391958,
+    "mean_test_acc": 0.9700000087420145,
+    "std_test_acc": 0.016329940378618523,
+    "mean_val_loss": 0.2500241349140803,
+    "mean_test_loss": 0.10754807541767757
+  },
+  {
+    "name": "AdamW(lr=3e-4,wd=1e-2)",
+    "spec": {
+      "name": "AdamW(lr=3e-4,wd=1e-2)",
+      "class": "torch.optim.AdamW",
+      "params": {
+        "lr": 0.0003,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning/AdamW/exp_0001",
+    "mean_val_acc": 0.9033333460489908,
+    "std_val_acc": 0.016996742777973455,
+    "mean_test_acc": 0.9666666785875956,
+    "std_test_acc": 0.004714068810145483,
+    "mean_val_loss": 0.33732883135477704,
+    "mean_test_loss": 0.14588855703671774
+  }
+]

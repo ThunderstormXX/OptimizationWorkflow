@@ -1,0 +1,27 @@
+{
+  "name": "O-SGDM(r=auto*1,beta=0.9,lr=1e-3,ns=5,wd=1e-2)",
+  "spec": {
+    "name": "O-SGDM(r=auto*1,beta=0.9,lr=1e-3,ns=5,wd=1e-2)",
+    "class": "optim.legacy_frankwolfe.OrthogonalSGDM",
+    "params": {
+      "constraint": {
+        "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+        "params": {
+          "radius": "auto",
+          "radius_mult": 1.0,
+          "ns_steps": 5
+        }
+      },
+      "step_size": 0.001,
+      "momentum": 0.9,
+      "weight_decay": 0.01
+    }
+  },
+  "exp_dir": "workflow/tuning/O-SGDM/exp_0002",
+  "mean_val_acc": 0.6200000047683716,
+  "std_val_acc": 0.050000011920928955,
+  "mean_test_acc": 0.6599999964237213,
+  "std_test_acc": 0.010000020265579224,
+  "mean_val_loss": 10035.861328125,
+  "mean_test_loss": 9966.59716796875
+}

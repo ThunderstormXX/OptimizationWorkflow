@@ -1,0 +1,17 @@
+{
+  "method": "SGD",
+  "num_samples": 6,
+  "seed": 2,
+  "template": {
+    "name": "SGD",
+    "class": "torch.optim.SGD",
+    "params": {
+      "lr": 0.1
+    }
+  },
+  "distributions": {
+    "params.lr": {"type": "loguniform", "low": 0.001, "high": 0.5},
+    "params.momentum": {"type": "choice", "values": [0.0, 0.5, 0.9]}
+  },
+  "name_keys": ["lr", "momentum"]
+}

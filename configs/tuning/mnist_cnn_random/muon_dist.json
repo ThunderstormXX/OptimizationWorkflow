@@ -1,0 +1,20 @@
+{
+  "method": "Muon",
+  "num_samples": 6,
+  "seed": 1,
+  "template": {
+    "name": "Muon",
+    "class": "optim.muon.SingleDeviceMuon",
+    "params": {
+      "lr": 0.01,
+      "momentum": 0.9,
+      "weight_decay": 0.01
+    }
+  },
+  "distributions": {
+    "params.lr": {"type": "loguniform", "low": 0.002, "high": 0.02},
+    "params.momentum": {"type": "uniform", "low": 0.85, "high": 0.98},
+    "params.weight_decay": {"type": "choice", "values": [0.0, 1e-4, 1e-3, 1e-2]}
+  },
+  "name_keys": ["lr", "momentum", "weight_decay"]
+}

@@ -1,0 +1,3 @@
+{
+  "config": "configs/experiments/mnist_cnn.json"
+}

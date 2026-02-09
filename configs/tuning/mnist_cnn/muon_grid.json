@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Muon(lr=1e-2,momentum=0.9,wd=1e-2)",
+    "class": "optim.muon.SingleDeviceMuon",
+    "params": {"lr": 0.01, "momentum": 0.9, "weight_decay": 0.01}
+  },
+  {
+    "name": "Muon(lr=5e-3,momentum=0.9,wd=1e-2)",
+    "class": "optim.muon.SingleDeviceMuon",
+    "params": {"lr": 0.005, "momentum": 0.9, "weight_decay": 0.01}
+  },
+  {
+    "name": "Muon(lr=1e-2,momentum=0.95,wd=1e-2)",
+    "class": "optim.muon.SingleDeviceMuon",
+    "params": {"lr": 0.01, "momentum": 0.95, "weight_decay": 0.01}
+  }
+]

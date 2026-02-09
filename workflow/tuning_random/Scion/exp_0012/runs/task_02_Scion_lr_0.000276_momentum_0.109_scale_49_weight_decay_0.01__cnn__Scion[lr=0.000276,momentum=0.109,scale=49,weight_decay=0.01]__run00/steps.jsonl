@@ -1,0 +1,80 @@
+{"iter": 1.0, "batch_loss": 39073.203125}
+{"iter": 2.0, "batch_loss": 38205.48046875}
+{"iter": 3.0, "batch_loss": 41173.74609375}
+{"iter": 4.0, "batch_loss": 41223.609375}
+{"iter": 5.0, "batch_loss": 37801.390625}
+{"iter": 6.0, "batch_loss": 37123.78515625}
+{"iter": 7.0, "batch_loss": 31421.708984375}
+{"iter": 8.0, "batch_loss": 33779.40234375}
+{"iter": 9.0, "batch_loss": 36815.07421875}
+{"iter": 10.0, "batch_loss": 33457.59375, "loss": 35030.84425}
+{"iter": 11.0, "batch_loss": 35833.35546875}
+{"iter": 12.0, "batch_loss": 33369.734375}
+{"iter": 13.0, "batch_loss": 34734.16015625}
+{"iter": 14.0, "batch_loss": 33745.7890625}
+{"iter": 15.0, "batch_loss": 32780.05078125}
+{"iter": 16.0, "batch_loss": 35753.48046875}
+{"iter": 17.0, "batch_loss": 37817.0546875}
+{"iter": 18.0, "batch_loss": 34093.50390625}
+{"iter": 19.0, "batch_loss": 35472.6796875}
+{"iter": 20.0, "batch_loss": 31130.224609375, "loss": 31520.054984375}
+{"iter": 21.0, "batch_loss": 27613.607421875}
+{"iter": 22.0, "batch_loss": 29067.400390625}
+{"iter": 23.0, "batch_loss": 30391.720703125}
+{"iter": 24.0, "batch_loss": 28030.77734375}
+{"iter": 25.0, "batch_loss": 20892.646484375}
+{"iter": 26.0, "batch_loss": 33585.8984375}
+{"iter": 27.0, "batch_loss": 31314.408203125}
+{"iter": 28.0, "batch_loss": 33704.421875}
+{"iter": 29.0, "batch_loss": 30368.484375}
+{"iter": 30.0, "batch_loss": 26611.314453125, "loss": 28264.936953125}
+{"iter": 31.0, "batch_loss": 29954.4609375}
+{"iter": 32.0, "batch_loss": 25797.05078125}
+{"iter": 33.0, "batch_loss": 27513.392578125}
+{"iter": 34.0, "batch_loss": 24629.90625}
+{"iter": 35.0, "batch_loss": 29585.853515625}
+{"iter": 36.0, "batch_loss": 28810.607421875}
+{"iter": 37.0, "batch_loss": 26916.333984375}
+{"iter": 38.0, "batch_loss": 24557.70703125}
+{"iter": 39.0, "batch_loss": 26027.3671875}
+{"iter": 40.0, "batch_loss": 24876.87890625, "loss": 25270.80371875}
+{"iter": 41.0, "batch_loss": 21393.11328125}
+{"iter": 42.0, "batch_loss": 23874.2890625}
+{"iter": 43.0, "batch_loss": 25270.712890625}
+{"iter": 44.0, "batch_loss": 24900.431640625}
+{"iter": 45.0, "batch_loss": 24855.990234375}
+{"iter": 46.0, "batch_loss": 22503.06640625}
+{"iter": 47.0, "batch_loss": 26933.21484375}
+{"iter": 48.0, "batch_loss": 24824.7578125}
+{"iter": 49.0, "batch_loss": 23140.54296875}
+{"iter": 50.0, "batch_loss": 22156.220703125, "loss": 22538.826921875}
+{"iter": 51.0, "batch_loss": 24471.57421875}
+{"iter": 52.0, "batch_loss": 24041.267578125}
+{"iter": 53.0, "batch_loss": 18397.8359375}
+{"iter": 54.0, "batch_loss": 22923.328125}
+{"iter": 55.0, "batch_loss": 21088.341796875}
+{"iter": 56.0, "batch_loss": 21247.73828125}
+{"iter": 57.0, "batch_loss": 23390.484375}
+{"iter": 58.0, "batch_loss": 20615.1953125}
+{"iter": 59.0, "batch_loss": 20694.294921875}
+{"iter": 60.0, "batch_loss": 22578.150390625, "loss": 20080.751796875}
+{"iter": 61.0, "batch_loss": 18567.4609375}
+{"iter": 62.0, "batch_loss": 19755.732421875}
+{"iter": 63.0, "batch_loss": 19568.390625}
+{"iter": 64.0, "batch_loss": 16113.15625}
+{"iter": 65.0, "batch_loss": 21580.3515625}
+{"iter": 66.0, "batch_loss": 20116.5}
+{"iter": 67.0, "batch_loss": 17573.466796875}
+{"iter": 68.0, "batch_loss": 16783.08984375}
+{"iter": 69.0, "batch_loss": 14662.9091796875}
+{"iter": 70.0, "batch_loss": 18375.4296875, "loss": 17848.1879375}
+{"iter": 71.0, "batch_loss": 21424.6484375}
+{"iter": 72.0, "batch_loss": 16615.501953125}
+{"iter": 73.0, "batch_loss": 15730.71484375}
+{"iter": 74.0, "batch_loss": 17133.37109375}
+{"iter": 75.0, "batch_loss": 17618.009765625}
+{"iter": 76.0, "batch_loss": 17123.431640625}
+{"iter": 77.0, "batch_loss": 18113.86328125}
+{"iter": 78.0, "batch_loss": 15344.1015625}
+{"iter": 79.0, "batch_loss": 17864.630859375}
+{"iter": 80.0, "batch_loss": 14471.6083984375, "loss": 15774.43996875}

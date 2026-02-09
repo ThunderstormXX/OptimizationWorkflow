@@ -5,7 +5,7 @@ import numpy as np
 import pytest
 
 from models.numpy_vector import NumpyVectorModel
-from optim.frank_wolfe import FrankWolfeOptimizer, FWState
+from optim.legacy_frankwolfe import FrankWolfeOptimizer, FWState
 from tasks.synthetic_quadratic import QuadraticGradComputer, QuadraticProblem, SyntheticQuadraticTask
 
 

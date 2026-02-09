@@ -1,0 +1,10 @@
+[
+  {
+    "name": "AdamW[lr=0.000115,weight_decay=0.01]",
+    "class": "torch.optim.AdamW",
+    "params": {
+      "lr": 0.00011476258854905245,
+      "weight_decay": 0.01
+    }
+  }
+]

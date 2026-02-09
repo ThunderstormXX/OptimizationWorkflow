@@ -30,8 +30,8 @@ from distributed.strategies import (
     GradientTrackingStrategy,
     LocalStepThenGossipParams,
 )
-from optim.constraints import L2BallConstraint, SimplexConstraint
-from optim.frank_wolfe import (
+from optim.legacy_frankwolfe import L2BallConstraint, SimplexConstraint
+from optim.legacy_frankwolfe import (
     FrankWolfeOptimizer,
     constant_step_size,
     harmonic_step_size,
@@ -153,7 +153,7 @@ def _fw_factory(config: dict[str, Any]) -> FrankWolfeOptimizer[Any, Any]:
 def _gd_factory(config: dict[str, Any]) -> Any:
     """Factory for Gradient Descent optimizer."""
     # Import here to avoid circular dependency at module load
-    from optim.gradient_descent import GradientDescentOptimizer
+    from optim.legacy_frankwolfe import GradientDescentOptimizer
 
     lr = config.get("lr", 0.1)
     return GradientDescentOptimizer(lr=lr)
@@ -162,7 +162,7 @@ def _gd_factory(config: dict[str, Any]) -> Any:
 def _pgd_factory(config: dict[str, Any]) -> Any:
     """Factory for Projected Gradient Descent optimizer."""
     # Import here to avoid circular dependency at module load
-    from optim.gradient_descent import ProjectedGradientDescentOptimizer
+    from optim.legacy_frankwolfe import ProjectedGradientDescentOptimizer
 
     lr = config.get("lr", 0.1)
     constraint = _build_constraint(config)

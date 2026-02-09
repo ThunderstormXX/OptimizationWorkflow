@@ -12,8 +12,8 @@ import pytest
 
 from environments.single_process import SingleProcessEnvironment
 from models.numpy_vector import NumpyVectorModel
-from optim.constraints import L2BallConstraint, SimplexConstraint
-from optim.gradient_descent import (
+from optim.legacy_frankwolfe import L2BallConstraint, SimplexConstraint
+from optim.legacy_frankwolfe import (
     GDState,
     GradientDescentOptimizer,
     ProjectedGradientDescentOptimizer,

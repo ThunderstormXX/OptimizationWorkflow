@@ -1,0 +1,110 @@
+[
+  {
+    "name": "SGD[lr=0.0434,momentum=0.9]",
+    "spec": {
+      "name": "SGD[lr=0.0434,momentum=0.9]",
+      "class": "torch.optim.SGD",
+      "params": {
+        "lr": 0.0434249850571912,
+        "momentum": 0.9
+      }
+    },
+    "exp_dir": "workflow/tuning_random/SGD/exp_0005",
+    "mean_val_acc": 0.875,
+    "std_val_acc": 0.05500000715255737,
+    "mean_test_acc": 0.8900000154972076,
+    "std_test_acc": 0.09000000357627869,
+    "mean_val_loss": 0.49860359728336334,
+    "mean_test_loss": 0.353765033185482
+  },
+  {
+    "name": "SGD[lr=0.00177,momentum=0.5]",
+    "spec": {
+      "name": "SGD[lr=0.00177,momentum=0.5]",
+      "class": "torch.optim.SGD",
+      "params": {
+        "lr": 0.001766788623186709,
+        "momentum": 0.5
+      }
+    },
+    "exp_dir": "workflow/tuning_random/SGD/exp_0001",
+    "mean_val_acc": 0.8600000143051147,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.9399999976158142,
+    "std_test_acc": 0.009999990463256836,
+    "mean_val_loss": 0.5067006349563599,
+    "mean_test_loss": 0.35389444231987
+  },
+  {
+    "name": "SGD[lr=0.00478,momentum=0]",
+    "spec": {
+      "name": "SGD[lr=0.00478,momentum=0]",
+      "class": "torch.optim.SGD",
+      "params": {
+        "lr": 0.0047754661808347525,
+        "momentum": 0.0
+      }
+    },
+    "exp_dir": "workflow/tuning_random/SGD/exp_0004",
+    "mean_val_acc": 0.8449999988079071,
+    "std_val_acc": 0.04499998688697815,
+    "mean_test_acc": 0.9050000011920929,
+    "std_test_acc": 0.025000005960464478,
+    "mean_val_loss": 0.5060097128152847,
+    "mean_test_loss": 0.34980812668800354
+  },
+  {
+    "name": "SGD[lr=0.153,momentum=0.5]",
+    "spec": {
+      "name": "SGD[lr=0.153,momentum=0.5]",
+      "class": "torch.optim.SGD",
+      "params": {
+        "lr": 0.15253316898401836,
+        "momentum": 0.5
+      }
+    },
+    "exp_dir": "workflow/tuning_random/SGD/exp_0003",
+    "mean_val_acc": 0.4749999865889549,
+    "std_val_acc": 0.3649999871850014,
+    "mean_test_acc": 0.5100000128149986,
+    "std_test_acc": 0.4000000134110451,
+    "mean_val_loss": 1.3711233139038086,
+    "mean_test_loss": 1.3160137832164764
+  },
+  {
+    "name": "SGD[lr=0.38,momentum=0]",
+    "spec": {
+      "name": "SGD[lr=0.38,momentum=0]",
+      "class": "torch.optim.SGD",
+      "params": {
+        "lr": 0.38045896572549853,
+        "momentum": 0.0
+      }
+    },
+    "exp_dir": "workflow/tuning_random/SGD/exp_0000",
+    "mean_val_acc": 0.10999999940395355,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.10999999940395355,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 2.300779342651367,
+    "mean_test_loss": 2.3078662157058716
+  },
+  {
+    "name": "SGD[lr=0.18,momentum=0.9]",
+    "spec": {
+      "name": "SGD[lr=0.18,momentum=0.9]",
+      "class": "torch.optim.SGD",
+      "params": {
+        "lr": 0.1798814628518838,
+        "momentum": 0.9
+      }
+    },
+    "exp_dir": "workflow/tuning_random/SGD/exp_0002",
+    "mean_val_acc": 0.10999999940395355,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.10999999940395355,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 2.301268219947815,
+    "mean_test_loss": 2.310760498046875
+  }
+]

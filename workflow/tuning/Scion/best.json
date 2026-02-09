@@ -1,0 +1,22 @@
+{
+  "name": "Scion(lr=5e-4,m=0.1,norm=Auto,scale=0.5)",
+  "spec": {
+    "name": "Scion(lr=5e-4,m=0.1,norm=Auto,scale=0.5)",
+    "class": "optim.scion.Scion",
+    "params": {
+      "lr": 0.0005,
+      "momentum": 0.1,
+      "norm": "Auto",
+      "norm_kwargs": {},
+      "scale": 0.5,
+      "unconstrained": false
+    }
+  },
+  "exp_dir": "workflow/tuning/Scion/exp_0000",
+  "mean_val_acc": 0.10999999940395355,
+  "std_val_acc": 0.0,
+  "mean_test_acc": 0.10999999940395355,
+  "std_test_acc": 0.0,
+  "mean_val_loss": 2.301021695137024,
+  "mean_test_loss": 2.302318811416626
+}

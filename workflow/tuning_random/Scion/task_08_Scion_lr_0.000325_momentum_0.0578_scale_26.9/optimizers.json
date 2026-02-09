@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Scion[lr=0.000325,momentum=0.0578,scale=26.9]",
+    "class": "optim.scion.Scion",
+    "params": {
+      "lr": 0.00032497108229106704,
+      "momentum": 0.0577529378674375,
+      "norm": "Auto",
+      "norm_kwargs": {},
+      "scale": 26.916865121329984,
+      "unconstrained": false
+    }
+  }
+]

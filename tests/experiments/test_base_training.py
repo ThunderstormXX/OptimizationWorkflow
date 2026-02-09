@@ -141,14 +141,14 @@ def test_build_optimizer_with_torch() -> None:
 
 
 def test_build_optimizer_stochastic_fw_skip_constraint() -> None:
-    from optim.stochastic_frank_wolfe import StochasticFrankWolfe
+    from optim.legacy_frankwolfe import StochasticFrankWolfe
 
     exp = ExperimentBaseTraining(tasks=[])
     model = torch.nn.Linear(2, 1)
     spec = {
-        "class": "optim.stochastic_frank_wolfe.StochasticFrankWolfe",
+        "class": "optim.legacy_frankwolfe.StochasticFrankWolfe",
         "params": {
-            "constraint": {"class": "optim.constraints.L2BallConstraint", "params": {"radius": "auto"}},
+            "constraint": {"class": "optim.legacy_frankwolfe.L2BallConstraint", "params": {"radius": "auto"}},
             "step_size": {"type": "constant", "gamma": 0.5},
         },
     }

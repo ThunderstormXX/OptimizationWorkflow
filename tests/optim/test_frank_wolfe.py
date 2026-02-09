@@ -13,8 +13,8 @@ import pytest
 
 from environments.single_process import SingleProcessEnvironment
 from models.numpy_vector import NumpyVectorModel
-from optim.constraints import L2BallConstraint, SimplexConstraint
-from optim.frank_wolfe import (
+from optim.legacy_frankwolfe import L2BallConstraint, SimplexConstraint
+from optim.legacy_frankwolfe import (
     FrankWolfeOptimizer,
     FWState,
     constant_step_size,

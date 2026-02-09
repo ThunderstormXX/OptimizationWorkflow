@@ -1,0 +1,34 @@
+{
+  "experiment": {
+    "class": "experiments.base_training.ExperimentBaseTraining",
+    "params": {
+      "num_runs": 1,
+      "seed": 0,
+      "task_dirs": [
+        "configs/tasks/mnist_cnn"
+      ],
+      "task_overrides": {
+        "batch_size": 128,
+        "data_root": ".data",
+        "device": "mps",
+        "test_size": 100,
+        "train_size": 1000,
+        "val_size": 100,
+        "verbose": true
+      },
+      "trainer": {
+        "class": "trainers.supervised.SupervisedTrainer",
+        "params": {
+          "batch_log_every": 1,
+          "device": "mps",
+          "epochs": 10,
+          "full_loss_every": 10,
+          "progress": true,
+          "test_every": 1,
+          "val_every": 1
+        }
+      },
+      "workflow_dir": "workflow/frankwolfe"
+    }
+  }
+}

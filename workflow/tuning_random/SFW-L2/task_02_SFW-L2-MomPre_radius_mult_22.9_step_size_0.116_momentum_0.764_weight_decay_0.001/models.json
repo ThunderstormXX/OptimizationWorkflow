@@ -1,0 +1,10 @@
+[
+  {
+    "name": "cnn",
+    "class": "models.torch_nets.CNN",
+    "params": {},
+    "init": {
+      "type": "kaiming_normal"
+    }
+  }
+]

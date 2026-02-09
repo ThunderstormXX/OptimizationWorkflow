@@ -1,0 +1,10 @@
+[
+  {
+    "name": "SGD[lr=0.00177,momentum=0.5]",
+    "class": "torch.optim.SGD",
+    "params": {
+      "lr": 0.001766788623186709,
+      "momentum": 0.5
+    }
+  }
+]

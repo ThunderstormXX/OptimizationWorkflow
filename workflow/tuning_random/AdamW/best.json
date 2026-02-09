@@ -1,0 +1,18 @@
+{
+  "name": "AdamW[lr=0.00269,weight_decay=0.001]",
+  "spec": {
+    "name": "AdamW[lr=0.00269,weight_decay=0.001]",
+    "class": "torch.optim.AdamW",
+    "params": {
+      "lr": 0.00268879655369285,
+      "weight_decay": 0.001
+    }
+  },
+  "exp_dir": "workflow/tuning_random/AdamW/exp_0003",
+  "mean_val_acc": 0.9249999821186066,
+  "std_val_acc": 0.025000005960464478,
+  "mean_test_acc": 0.9750000238418579,
+  "std_test_acc": 0.004999995231628418,
+  "mean_val_loss": 0.272371269762516,
+  "mean_test_loss": 0.08489293232560158
+}

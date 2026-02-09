@@ -1,0 +1,27 @@
+{
+  "name": "SFW-Ortho-MomPre[radius_mult=1.29,ns_steps=5,step_size=0.00389,momentum=0.924,weight_decay=0]",
+  "spec": {
+    "name": "SFW-Ortho-MomPre[radius_mult=1.29,ns_steps=5,step_size=0.00389,momentum=0.924,weight_decay=0]",
+    "class": "optim.legacy_frankwolfe.StochasticFrankWolfeMomentumPre",
+    "params": {
+      "constraint": {
+        "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+        "params": {
+          "radius": "auto",
+          "radius_mult": 1.2925393841064625,
+          "ns_steps": 5
+        }
+      },
+      "step_size": 0.0038939209537263517,
+      "momentum": 0.9241026276996727,
+      "weight_decay": 0.0
+    }
+  },
+  "exp_dir": "workflow/tuning_random/SFW-Ortho/exp_0008",
+  "mean_val_acc": 0.8899999856948853,
+  "std_val_acc": 0.0,
+  "mean_test_acc": 0.9700000286102295,
+  "std_test_acc": 0.0,
+  "mean_val_loss": 1398.3570556640625,
+  "mean_test_loss": 858.552001953125
+}

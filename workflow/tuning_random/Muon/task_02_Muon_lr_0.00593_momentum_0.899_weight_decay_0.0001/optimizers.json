@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Muon[lr=0.00593,momentum=0.899,weight_decay=0.0001]",
+    "class": "optim.muon.SingleDeviceMuon",
+    "params": {
+      "lr": 0.0059330121708449654,
+      "momentum": 0.8993499790320846,
+      "weight_decay": 0.0001
+    }
+  }
+]

@@ -8,7 +8,7 @@ from distributed.topology import RingTopology
 from distributed.communicator import SynchronousGossipCommunicator
 from models.numpy_vector import NumpyVectorModel
 from tasks.synthetic_quadratic import QuadraticGradComputer, QuadraticProblem, SyntheticQuadraticTask
-from optim.gradient_descent import GradientDescentOptimizer, GDState
+from optim.legacy_frankwolfe import GradientDescentOptimizer, GDState
 
 
 def _make_node(node_id: int) -> GossipNode:

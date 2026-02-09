@@ -17,7 +17,7 @@ import pytest
 
 from environments.single_process import SingleProcessEnvironment
 from models.numpy_vector import NumpyVectorModel
-from optim.gradient_descent import GradientDescentOptimizer
+from optim.legacy_frankwolfe import GradientDescentOptimizer
 from tasks.logistic_regression import (
     LogisticGradComputer,
     LogisticRegressionTask,

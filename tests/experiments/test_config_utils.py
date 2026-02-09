@@ -6,7 +6,7 @@ from experiments.config import apply_overrides, import_class, load_task_dir, res
 
 
 def test_resolve_spec_instantiates_class() -> None:
-    spec = {"class": "optim.constraints.L2BallConstraint", "params": {"radius": 1.5}}
+    spec = {"class": "optim.legacy_frankwolfe.L2BallConstraint", "params": {"radius": 1.5}}
     obj = resolve_spec(spec)
     assert obj.radius == 1.5
     assert resolve_spec(5) == 5
@@ -14,14 +14,14 @@ def test_resolve_spec_instantiates_class() -> None:
 
 def test_resolve_values_skip_keys() -> None:
     payload = {
-        "constraint": {"class": "optim.constraints.L2BallConstraint", "params": {"radius": "auto"}},
+        "constraint": {"class": "optim.legacy_frankwolfe.L2BallConstraint", "params": {"radius": "auto"}},
         "lr": 0.1,
     }
     resolved = resolve_values(payload, skip_keys={"constraint"})
     assert isinstance(resolved["constraint"], dict)
     assert resolved["lr"] == 0.1
     assert resolve_values([1, {"a": 2}]) == [1, {"a": 2}]
-    obj = resolve_values({"class": "optim.constraints.L2BallConstraint", "params": {"radius": 2.0}})
+    obj = resolve_values({"class": "optim.legacy_frankwolfe.L2BallConstraint", "params": {"radius": 2.0}})
     assert obj.radius == 2.0
 
 

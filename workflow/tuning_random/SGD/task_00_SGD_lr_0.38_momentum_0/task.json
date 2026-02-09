@@ -1,0 +1,17 @@
+{
+  "class": "tasks.mnist.MNISTSupervisedTask",
+  "params": {
+    "data_root": ".data",
+    "download": true,
+    "train_size": 60000,
+    "val_size": 10000,
+    "test_size": 1000,
+    "batch_size": 128,
+    "device": "auto",
+    "seed": 0,
+    "val_from": "test",
+    "test_from": "test",
+    "num_workers": 0,
+    "pin_memory": null
+  }
+}

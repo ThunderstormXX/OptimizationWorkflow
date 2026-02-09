@@ -1,0 +1,19 @@
+[
+  {
+    "name": "SFW-Ortho-MomPre[radius_mult=3.23,ns_steps=7,step_size=0.00668,momentum=0.9,weight_decay=0]",
+    "class": "optim.legacy_frankwolfe.StochasticFrankWolfeMomentumPre",
+    "params": {
+      "constraint": {
+        "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+        "params": {
+          "radius": "auto",
+          "radius_mult": 3.2313484602661564,
+          "ns_steps": 7
+        }
+      },
+      "step_size": 0.006683454057986472,
+      "momentum": 0.9002295852699174,
+      "weight_decay": 0.0
+    }
+  }
+]

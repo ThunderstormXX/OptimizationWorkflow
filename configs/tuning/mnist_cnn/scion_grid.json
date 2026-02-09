@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Scion(lr=5e-4,m=0.1,norm=Auto,scale=0.5)",
+    "class": "optim.scion.Scion",
+    "params": {"lr": 0.0005, "momentum": 0.1, "norm": "Auto", "norm_kwargs": {}, "scale": 0.5, "unconstrained": false}
+  },
+  {
+    "name": "Scion(lr=1e-3,m=0.1,norm=Auto,scale=0.5)",
+    "class": "optim.scion.Scion",
+    "params": {"lr": 0.001, "momentum": 0.1, "norm": "Auto", "norm_kwargs": {}, "scale": 0.5, "unconstrained": false}
+  },
+  {
+    "name": "Scion(lr=1e-3,m=0.1,norm=Auto,scale=1)",
+    "class": "optim.scion.Scion",
+    "params": {"lr": 0.001, "momentum": 0.1, "norm": "Auto", "norm_kwargs": {}, "scale": 1.0, "unconstrained": false}
+  },
+  {
+    "name": "Scion(lr=2e-3,m=0.1,norm=Auto,scale=0.5)",
+    "class": "optim.scion.Scion",
+    "params": {"lr": 0.002, "momentum": 0.1, "norm": "Auto", "norm_kwargs": {}, "scale": 0.5, "unconstrained": false}
+  }
+]

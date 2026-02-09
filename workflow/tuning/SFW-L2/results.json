@@ -1,0 +1,106 @@
+[
+  {
+    "name": "SFW-L2-MomPre(beta=0.9,r=auto*5,step=0.1,wd=1e-2)",
+    "spec": {
+      "name": "SFW-L2-MomPre(beta=0.9,r=auto*5,step=0.1,wd=1e-2)",
+      "class": "optim.legacy_frankwolfe.StochasticFrankWolfeMomentumPre",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.L2BallConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 5.0
+          }
+        },
+        "step_size": 0.1,
+        "momentum": 0.9,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning/SFW-L2/exp_0001",
+    "mean_val_acc": 0.10999999940395355,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.09000000357627869,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 9.354926824569702,
+    "mean_test_loss": 8.317897319793701
+  },
+  {
+    "name": "SFW-L2-MomPre(beta=0.9,r=auto*10,step=0.1,wd=1e-2)",
+    "spec": {
+      "name": "SFW-L2-MomPre(beta=0.9,r=auto*10,step=0.1,wd=1e-2)",
+      "class": "optim.legacy_frankwolfe.StochasticFrankWolfeMomentumPre",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.L2BallConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 10.0
+          }
+        },
+        "step_size": 0.1,
+        "momentum": 0.9,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning/SFW-L2/exp_0003",
+    "mean_val_acc": 0.10999999940395355,
+    "std_val_acc": 0.0,
+    "mean_test_acc": 0.10000000149011612,
+    "std_test_acc": 0.009999997913837433,
+    "mean_val_loss": 11.68202257156372,
+    "mean_test_loss": 11.807902812957764
+  },
+  {
+    "name": "SFW-L2-MomPre(beta=0.9,r=auto*5,step=0.05,wd=1e-2)",
+    "spec": {
+      "name": "SFW-L2-MomPre(beta=0.9,r=auto*5,step=0.05,wd=1e-2)",
+      "class": "optim.legacy_frankwolfe.StochasticFrankWolfeMomentumPre",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.L2BallConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 5.0
+          }
+        },
+        "step_size": 0.05,
+        "momentum": 0.9,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning/SFW-L2/exp_0000",
+    "mean_val_acc": 0.09499999694526196,
+    "std_val_acc": 0.03499999828636646,
+    "mean_test_acc": 0.09499999787658453,
+    "std_test_acc": 0.06499999854713678,
+    "mean_val_loss": 3.021391749382019,
+    "mean_test_loss": 3.112071990966797
+  },
+  {
+    "name": "SFW-L2-MomPre(beta=0.9,r=auto*10,step=0.05,wd=1e-2)",
+    "spec": {
+      "name": "SFW-L2-MomPre(beta=0.9,r=auto*10,step=0.05,wd=1e-2)",
+      "class": "optim.legacy_frankwolfe.StochasticFrankWolfeMomentumPre",
+      "params": {
+        "constraint": {
+          "class": "optim.legacy_frankwolfe.L2BallConstraint",
+          "params": {
+            "radius": "auto",
+            "radius_mult": 10.0
+          }
+        },
+        "step_size": 0.05,
+        "momentum": 0.9,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning/SFW-L2/exp_0002",
+    "mean_val_acc": 0.09499999694526196,
+    "std_val_acc": 0.03499999828636646,
+    "mean_test_acc": 0.09499999787658453,
+    "std_test_acc": 0.06499999854713678,
+    "mean_val_loss": 9.431750774383545,
+    "mean_test_loss": 9.9720139503479
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "name": "AdamW[lr=0.00269,weight_decay=0.001]",
+    "spec": {
+      "name": "AdamW[lr=0.00269,weight_decay=0.001]",
+      "class": "torch.optim.AdamW",
+      "params": {
+        "lr": 0.00268879655369285,
+        "weight_decay": 0.001
+      }
+    },
+    "exp_dir": "workflow/tuning_random/AdamW/exp_0003",
+    "mean_val_acc": 0.9249999821186066,
+    "std_val_acc": 0.025000005960464478,
+    "mean_test_acc": 0.9750000238418579,
+    "std_test_acc": 0.004999995231628418,
+    "mean_val_loss": 0.272371269762516,
+    "mean_test_loss": 0.08489293232560158
+  },
+  {
+    "name": "AdamW[lr=0.00177,weight_decay=0.01]",
+    "spec": {
+      "name": "AdamW[lr=0.00177,weight_decay=0.01]",
+      "class": "torch.optim.AdamW",
+      "params": {
+        "lr": 0.0017673129706469385,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning_random/AdamW/exp_0000",
+    "mean_val_acc": 0.9200000166893005,
+    "std_val_acc": 0.009999990463256836,
+    "mean_test_acc": 0.9650000035762787,
+    "std_test_acc": 0.005000025033950806,
+    "mean_val_loss": 0.2833383083343506,
+    "mean_test_loss": 0.09889474511146545
+  },
+  {
+    "name": "AdamW[lr=0.000727,weight_decay=0.0001]",
+    "spec": {
+      "name": "AdamW[lr=0.000727,weight_decay=0.0001]",
+      "class": "torch.optim.AdamW",
+      "params": {
+        "lr": 0.0007273208039363897,
+        "weight_decay": 0.0001
+      }
+    },
+    "exp_dir": "workflow/tuning_random/AdamW/exp_0004",
+    "mean_val_acc": 0.9000000059604645,
+    "std_val_acc": 0.02000001072883606,
+    "mean_test_acc": 0.9699999988079071,
+    "std_test_acc": 0.010000020265579224,
+    "mean_val_loss": 0.2848321944475174,
+    "mean_test_loss": 0.11531146988272667
+  },
+  {
+    "name": "AdamW[lr=0.000557,weight_decay=0.001]",
+    "spec": {
+      "name": "AdamW[lr=0.000557,weight_decay=0.001]",
+      "class": "torch.optim.AdamW",
+      "params": {
+        "lr": 0.0005565237228974189,
+        "weight_decay": 0.001
+      }
+    },
+    "exp_dir": "workflow/tuning_random/AdamW/exp_0005",
+    "mean_val_acc": 0.9000000059604645,
+    "std_val_acc": 0.02000001072883606,
+    "mean_test_acc": 0.9700000286102295,
+    "std_test_acc": 0.0,
+    "mean_val_loss": 0.320010706782341,
+    "mean_test_loss": 0.12160862609744072
+  },
+  {
+    "name": "AdamW[lr=0.000396,weight_decay=0.001]",
+    "spec": {
+      "name": "AdamW[lr=0.000396,weight_decay=0.001]",
+      "class": "torch.optim.AdamW",
+      "params": {
+        "lr": 0.0003964028983186206,
+        "weight_decay": 0.001
+      }
+    },
+    "exp_dir": "workflow/tuning_random/AdamW/exp_0002",
+    "mean_val_acc": 0.8950000107288361,
+    "std_val_acc": 0.015000015497207642,
+    "mean_test_acc": 0.9600000083446503,
+    "std_test_acc": 0.010000020265579224,
+    "mean_val_loss": 0.3405817896127701,
+    "mean_test_loss": 0.13990303874015808
+  },
+  {
+    "name": "AdamW[lr=0.000115,weight_decay=0.01]",
+    "spec": {
+      "name": "AdamW[lr=0.000115,weight_decay=0.01]",
+      "class": "torch.optim.AdamW",
+      "params": {
+        "lr": 0.00011476258854905245,
+        "weight_decay": 0.01
+      }
+    },
+    "exp_dir": "workflow/tuning_random/AdamW/exp_0001",
+    "mean_val_acc": 0.875,
+    "std_val_acc": 0.004999995231628418,
+    "mean_test_acc": 0.9399999976158142,
+    "std_test_acc": 0.019999980926513672,
+    "mean_val_loss": 0.45429056882858276,
+    "mean_test_loss": 0.25526099652051926
+  }
+]

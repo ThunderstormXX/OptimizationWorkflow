@@ -1,25 +1,10 @@
 {
   "argv": [
-    "/Users/igoreshka/Desktop/OptimizationWorkflow/src/benchmarks/runner.py",
-    "--env",
-    "gossip",
-    "--steps",
-    "20",
-    "--n-nodes",
-    "5",
-    "--topology",
-    "ring",
-    "--dim",
-    "10",
-    "--seed",
-    "0",
-    "--workflow-dir",
-    "workflow",
-    "--exp-name",
-    "demo",
-    "--description",
-    "FW + gossip on synthetic quadratic"
+    "runner",
+    "--mode",
+    "single"
   ],
-  "created_at": "2026-01-20T11:21:30.932731+00:00",
-  "git_commit": "e6f1e9c69f80d575eea0c0822d8bfde1af28e208"
+  "created_at": "2026-02-09T09:57:10.049941+00:00",
+  "git_commit": "daad4a9f5ca083d2d9251061c8f31f48437c6bec",
+  "mode": "single"
 }

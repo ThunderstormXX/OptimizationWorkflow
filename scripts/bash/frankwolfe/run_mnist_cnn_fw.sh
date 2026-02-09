@@ -4,15 +4,15 @@ set -euo pipefail
 CONFIG=${CONFIG:-configs/experiments/mnist_cnn.json}
 WORKFLOW_DIR=${WORKFLOW_DIR:-workflow/frankwolfe}
 EPOCHS=${EPOCHS:-10}
-NUM_RUNS=${NUM_RUNS:-10}
+NUM_RUNS=${NUM_RUNS:-1}
 BATCH_SIZE=${BATCH_SIZE:-128}
-N_TRAIN=${N_TRAIN:-60000}
-N_VAL=${N_VAL:-10000}
-N_TEST=${N_TEST:-1000}
+N_TRAIN=${N_TRAIN:-1000}
+N_VAL=${N_VAL:-100}
+N_TEST=${N_TEST:-100}
 DATA_ROOT=${DATA_ROOT:-.data}
 DEVICE=${DEVICE:-auto}
 SEED=${SEED:-0}
-FULL_LOSS_EVERY=${FULL_LOSS_EVERY:-100}
+FULL_LOSS_EVERY=${FULL_LOSS_EVERY:-10}
 BATCH_LOG_EVERY=${BATCH_LOG_EVERY:-1}
 FULL_METRICS_EVERY=${FULL_METRICS_EVERY:-}
 BATCH_METRICS_EVERY=${BATCH_METRICS_EVERY:-}
@@ -27,8 +27,25 @@ fi
 
 export PYTHONUNBUFFERED=1
 export TQDM_MININTERVAL=0.1
+export OMP_NUM_THREADS=${OMP_NUM_THREADS:-1}
+export MKL_NUM_THREADS=${MKL_NUM_THREADS:-1}
+export OPENBLAS_NUM_THREADS=${OPENBLAS_NUM_THREADS:-1}
+export VECLIB_MAXIMUM_THREADS=${VECLIB_MAXIMUM_THREADS:-1}
+export NUMEXPR_NUM_THREADS=${NUMEXPR_NUM_THREADS:-1}
+export KMP_SHM_DISABLE=${KMP_SHM_DISABLE:-1}
+export KMP_DUPLICATE_LIB_OK=${KMP_DUPLICATE_LIB_OK:-TRUE}
+export MPLCONFIGDIR=${MPLCONFIGDIR:-/tmp/matplotlib}
+export SCION_COMPILE=${SCION_COMPILE:-0}
 
-if ! python - <<'PY'
+PYTHON_BIN=${PYTHON_BIN:-}
+if [ -z "$PYTHON_BIN" ] && [ -x ".venv/bin/python" ]; then
+  PYTHON_BIN=".venv/bin/python"
+fi
+if [ -z "$PYTHON_BIN" ]; then
+  PYTHON_BIN="python"
+fi
+
+if ! "$PYTHON_BIN" - <<'PY'
 import torch
 import torchvision
 import tqdm
@@ -53,7 +70,7 @@ if [ -n "$BATCH_METRICS_EVERY" ]; then
 fi
 
 CMD=(
-  python -m benchmarks.runner
+  "$PYTHON_BIN" -m benchmarks.runner
   --config "$CONFIG"
   --workflow-dir "$WORKFLOW_DIR"
   --set "experiment.params.seed=$SEED"

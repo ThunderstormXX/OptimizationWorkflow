@@ -1,34 +1,35 @@
-# demo
+# exp_0000
 
-FW + gossip on synthetic quadratic
+> See `artifacts/report.md` for plots and aggregated tables.
 
 ## Configuration
 
-- Environment: gossip
-- Steps: 20
-- Seed: 0
+- Mode: single
+- Environment: single
+- Steps: 50
 - Dimension: 10
 - Condition number: 10.0
+- Optimizer: fw
+- Learning rate: 0.1
 - Constraint: l2ball
+- Radius: 1.0
+- Seed: 0
 - Step schedule: harmonic
-- Nodes: 5
-- Topology: ring
 
 ## Reproduce
 
 ```bash
 python -m benchmarks.runner \
+    --mode single \
     --workflow-dir workflow \
-    --env gossip \
-    --steps 20 \
-    --seed 0 \
+    --env single \
+    --steps 50 \
     --dim 10 \
     --cond 10.0 \
+    --optimizer fw \
+    --lr 0.1 \
     --constraint l2ball \
-    --step-schedule harmonic \
     --radius 1.0 \
-    --n-nodes 5 \
-    --topology ring \
-    --exp-name "demo" \
-    --description "FW + gossip on synthetic quadratic"
+    --seed 0 \
+    --step-schedule harmonic
 ```

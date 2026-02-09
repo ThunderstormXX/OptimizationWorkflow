@@ -1,0 +1,30 @@
+{
+  "method": "O-SGDM",
+  "num_samples": 6,
+  "seed": 6,
+  "template": {
+    "name": "O-SGDM",
+    "class": "optim.legacy_frankwolfe.OrthogonalSGDM",
+    "params": {
+      "constraint": {
+        "class": "optim.legacy_frankwolfe.OrthogonalMatrixConstraint",
+        "params": {
+          "radius": "auto",
+          "radius_mult": 1.0,
+          "ns_steps": 5
+        }
+      },
+      "step_size": 0.001,
+      "momentum": 0.9,
+      "weight_decay": 0.01
+    }
+  },
+  "distributions": {
+    "params.constraint.params.radius_mult": {"type": "loguniform", "low": 0.2, "high": 3.0},
+    "params.constraint.params.ns_steps": {"type": "choice", "values": [3, 5]},
+    "params.step_size": {"type": "loguniform", "low": 1e-4, "high": 5e-3},
+    "params.momentum": {"type": "uniform", "low": 0.5, "high": 0.95},
+    "params.weight_decay": {"type": "choice", "values": [0.0, 1e-4, 1e-3, 1e-2]}
+  },
+  "name_keys": ["radius_mult", "ns_steps", "step_size", "momentum", "weight_decay"]
+}

@@ -1,0 +1,25 @@
+{
+  "method": "Scion",
+  "num_samples": 12,
+  "seed": 3,
+  "template": {
+    "name": "Scion",
+    "class": "optim.scion.Scion",
+    "params": {
+      "lr": 0.001,
+      "momentum": 0.1,
+      "norm": "Auto",
+      "norm_kwargs": {},
+      "scale": 1.0,
+      "unconstrained": false,
+      "weight_decay": 0.0
+    }
+  },
+  "distributions": {
+    "params.lr": {"type": "loguniform", "low": 1e-4, "high": 5e-3},
+    "params.momentum": {"type": "uniform", "low": 0.05, "high": 0.3},
+    "params.scale": {"type": "loguniform", "low": 0.5, "high": 50.0},
+    "params.weight_decay": {"type": "choice", "values": [0.0, 1e-4, 1e-3, 1e-2]}
+  },
+  "name_keys": ["lr", "momentum", "scale", "weight_decay"]
+}
